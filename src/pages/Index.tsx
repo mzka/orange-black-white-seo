@@ -1,115 +1,71 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
-const DASH_IMAGE = "https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7db5da15f7/files/adc27d5b-3383-4ce1-9ad1-b1fbb9b82616.jpg";
 const LOGO_IMAGE = "https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7db5da15f7/files/c452687c-8fc1-4883-9cf1-d825aa7e8bd8.jpg";
+const DASH_IMAGE = "https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7db5da15f7/files/adc27d5b-3383-4ce1-9ad1-b1fbb9b82616.jpg";
 
 const Y = "#fec30a";
 const B = "#0f0f0f";
 
-const NAV_LINKS = ["Услуги", "Тарифы", "Результаты", "О нас", "Контакты"];
+const NAV_LINKS = ["Как работает", "Результаты", "Тарифы"];
 
 const STATS = [
-  { value: "7 лет", label: "на рынке SEO" },
-  { value: "430+", label: "сайтов в ТОП" },
-  { value: "94%", label: "клиентов продлевают" },
-  { value: "30 дней", label: "до первых результатов" },
+  { value: "430+", label: "сайтов уже в ТОП" },
+  { value: "30 дней", label: "до первых позиций" },
+  { value: "94%", label: "пользователей продлевают" },
+  { value: "0 ч.", label: "ручной работы с вас" },
 ];
 
-const SERVICES = [
+const HOW = [
   {
-    icon: "Search",
-    title: "Продвижение в Яндексе",
-    desc: "Выводим сайт в ТОП-10 Яндекса по коммерческим запросам. Работаем с семантикой, структурой и поведенческими факторами.",
+    num: "01",
+    icon: "Globe",
+    title: "Подключаете сайт",
+    text: "Вводите адрес сайта, выбираете тематику и регион. Никакого доступа к коду — только URL.",
   },
   {
-    icon: "BarChart2",
-    title: "SEO-аудит сайта",
-    desc: "Полный технический и контентный аудит. Выявляем ошибки, которые мешают росту позиций, даём чёткий план исправлений.",
+    num: "02",
+    icon: "Cpu",
+    title: "Сервис всё делает сам",
+    text: "Алгоритм анализирует конкурентов, оптимизирует страницы и работает с факторами ранжирования Яндекса.",
   },
   {
-    icon: "FileText",
-    title: "Контент под SEO",
-    desc: "Пишем тексты, которые нравятся и поисковикам, и людям. Оптимизируем структуру страниц и мета-теги.",
+    num: "03",
+    icon: "TrendingUp",
+    title: "Наблюдаете за ростом",
+    text: "В личном кабинете видите позиции в реальном времени. График идёт вверх — вы просто наблюдаете.",
   },
-  {
-    icon: "Link",
-    title: "Наращивание ссылок",
-    desc: "Безопасное получение качественных обратных ссылок. Только белые методы, без риска санкций.",
-  },
-  {
-    icon: "MapPin",
-    title: "Локальное SEO",
-    desc: "Продвижение в Яндекс.Картах и геосервисах. Привлекаем клиентов из вашего города или района.",
-  },
-  {
-    icon: "Settings",
-    title: "Технический SEO",
-    desc: "Скорость загрузки, мобильная версия, структурированные данные, исправление ошибок краулинга.",
-  },
+];
+
+const FEATURES = [
+  { icon: "Zap", title: "Полностью автоматически", text: "Никаких SEO-специалистов, подрядчиков и ручной работы. Сервис делает всё сам 24/7." },
+  { icon: "BarChart2", title: "Позиции в реальном времени", text: "Личный кабинет показывает текущие позиции по каждому запросу. Данные обновляются ежедневно." },
+  { icon: "Shield", title: "Только белые методы", text: "Работаем строго по требованиям Яндекса. Никаких рисков санкций и фильтров." },
+  { icon: "Eye", title: "Прозрачная аналитика", text: "Видите каждое действие системы: что сделано, какой результат, какая позиция сейчас." },
 ];
 
 const TARIFFS = [
   {
     name: "Старт",
-    price: "9 900",
-    period: "мес",
-    desc: "Для небольших сайтов и начинающего бизнеса",
-    features: [
-      "До 50 запросов",
-      "Технический аудит",
-      "Оптимизация 5 страниц",
-      "Ежемесячный отчёт",
-      "Поддержка по email",
-    ],
+    price: "2 900",
+    desc: "Для небольших сайтов",
+    features: ["1 сайт", "До 50 запросов", "Обновление позиций раз в 3 дня", "Базовая аналитика"],
     highlight: false,
   },
   {
     name: "Бизнес",
-    price: "24 900",
-    period: "мес",
-    desc: "Для активно растущего бизнеса",
-    features: [
-      "До 200 запросов",
-      "Полный SEO-аудит",
-      "Оптимизация 20 страниц",
-      "Контент 4 статьи/мес",
-      "Наращивание ссылок",
-      "Еженедельный отчёт",
-      "Приоритетная поддержка",
-    ],
+    price: "7 900",
+    desc: "Для растущего бизнеса",
+    features: ["До 5 сайтов", "До 500 запросов", "Ежедневное обновление позиций", "Полная аналитика", "Приоритетная поддержка"],
     highlight: true,
   },
   {
     name: "Про",
-    price: "49 900",
-    period: "мес",
-    desc: "Для крупных сайтов и интернет-магазинов",
-    features: [
-      "Неограниченные запросы",
-      "Полный аудит + анализ конкурентов",
-      "Оптимизация всех страниц",
-      "Контент без ограничений",
-      "Агрессивное линкбилдинг",
-      "Ежедневная аналитика",
-      "Персональный менеджер",
-    ],
+    price: "19 900",
+    desc: "Для агентств и крупных сайтов",
+    features: ["Неограниченно сайтов", "Неограниченно запросов", "Мониторинг в реальном времени", "API доступ", "Персональный менеджер"],
     highlight: false,
   },
-];
-
-const STEPS = [
-  { num: "01", title: "Анализ и аудит", text: "Изучаем сайт, нишу и конкурентов. Формируем семантическое ядро и стратегию." },
-  { num: "02", title: "Техническая оптимизация", text: "Исправляем ошибки, ускоряем сайт, настраиваем мета-теги и структуру." },
-  { num: "03", title: "Контент и ссылки", text: "Создаём SEO-тексты, получаем качественные ссылки, работаем с поведенческими факторами." },
-  { num: "04", title: "Рост и отчётность", text: "Отслеживаем позиции и трафик, корректируем стратегию, предоставляем прозрачные отчёты." },
-];
-
-const WHY = [
-  { icon: "Shield", title: "Только белые методы", text: "Работаем строго в рамках требований Яндекса. Никаких рисков санкций." },
-  { icon: "Eye", title: "Полная прозрачность", text: "Еженедельные отчёты с реальными цифрами. Видите каждый рубль и каждую позицию." },
-  { icon: "Zap", title: "Результат от 30 дней", text: "Первые движения в позициях уже в первый месяц. Гарантируем рост трафика." },
-  { icon: "Users", title: "Команда экспертов", text: "15 специалистов: SEO-аналитики, контентщики, технари и линкбилдеры." },
 ];
 
 const CASES = [
@@ -122,12 +78,12 @@ const CASES = [
     trafficGrowth: "+218%",
     topCount: 12,
     queries: [
-      { kw: "юрист по недвижимости москва",  was: 54,  now: 3  },
-      { kw: "составить договор купли продажи", was: 89,  now: 5  },
-      { kw: "юридическая консультация онлайн", was: 43,  now: 2  },
-      { kw: "раздел имущества при разводе",    was: 120, now: 7  },
-      { kw: "арбитражный юрист цена",          was: 67,  now: 4  },
-      { kw: "услуги адвоката по уголовным",    was: 95,  now: 9  },
+      { kw: "юрист по недвижимости москва",   was: 54,  now: 3 },
+      { kw: "составить договор купли продажи", was: 89,  now: 5 },
+      { kw: "юридическая консультация онлайн", was: 43,  now: 2 },
+      { kw: "раздел имущества при разводе",    was: 120, now: 7 },
+      { kw: "арбитражный юрист цена",          was: 67,  now: 4 },
+      { kw: "услуги адвоката по уголовным",    was: 95,  now: 9 },
     ],
     chart: [68, 55, 44, 32, 18, 9, 4],
   },
@@ -140,47 +96,40 @@ const CASES = [
     trafficGrowth: "+310%",
     topCount: 18,
     queries: [
-      { kw: "имплантация зубов под ключ",     was: 78,  now: 3  },
-      { kw: "виниры цена москва",             was: 102, now: 6  },
-      { kw: "лечение зубов без боли",         was: 56,  now: 2  },
-      { kw: "брекеты взрослым стоимость",     was: 88,  now: 5  },
-      { kw: "удаление зуба мудрости цена",    was: 34,  now: 1  },
-      { kw: "протезирование зубов москва",    was: 145, now: 8  },
+      { kw: "имплантация зубов под ключ",  was: 78,  now: 3 },
+      { kw: "виниры цена москва",          was: 102, now: 6 },
+      { kw: "лечение зубов без боли",      was: 56,  now: 2 },
+      { kw: "брекеты взрослым стоимость",  was: 88,  now: 5 },
+      { kw: "удаление зуба мудрости цена", was: 34,  now: 1 },
+      { kw: "протезирование зубов москва", was: 145, now: 8 },
     ],
     chart: [75, 60, 42, 28, 16, 8, 3],
   },
   {
     id: 2,
-    niche: "Интернет-магазин электроники",
+    niche: "Интернет-магазин",
     domain: "techno-shop.ru",
     period: "Февраль → Август 2024",
     months: "6 мес",
     trafficGrowth: "+420%",
     topCount: 34,
     queries: [
-      { kw: "купить iphone 15 pro москва",    was: 110, now: 4  },
-      { kw: "ноутбук для работы до 50000",    was: 87,  now: 3  },
-      { kw: "беспроводные наушники sony",     was: 63,  now: 2  },
-      { kw: "планшет для ребёнка 2024",       was: 95,  now: 5  },
-      { kw: "умная колонка яндекс цена",      was: 72,  now: 3  },
-      { kw: "купить телевизор самсунг 55",    was: 130, now: 7  },
+      { kw: "купить iphone 15 pro москва", was: 110, now: 4 },
+      { kw: "ноутбук для работы до 50000", was: 87,  now: 3 },
+      { kw: "беспроводные наушники sony",  was: 63,  now: 2 },
+      { kw: "планшет для ребёнка 2024",    was: 95,  now: 5 },
+      { kw: "умная колонка яндекс цена",   was: 72,  now: 3 },
+      { kw: "купить телевизор самсунг 55", was: 130, now: 7 },
     ],
     chart: [90, 72, 55, 38, 22, 12, 5],
   },
 ];
 
 export default function Index() {
-  const [form, setForm] = useState({ name: "", phone: "", site: "" });
-  const [sent, setSent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCase, setActiveCase] = useState(0);
-
-
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-  };
+  const [email, setEmail] = useState("");
+  const [emailSent, setEmailSent] = useState(false);
 
   return (
     <div className="min-h-screen bg-white text-[#0f0f0f]" style={{ fontFamily: "'Golos Text', sans-serif" }}>
@@ -204,15 +153,14 @@ export default function Index() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <a href="tel:+78001234567" className="hidden md:flex items-center gap-1.5 text-sm font-semibold text-[#0f0f0f]">
-              <Icon name="Phone" size={14} style={{ color: Y }} />
-              8 800 123-45-67
-            </a>
+            <button className="hidden md:block text-sm font-medium text-black/60 hover:text-black transition-colors">
+              Войти
+            </button>
             <button
               className="text-sm font-bold px-4 py-2 rounded-lg transition-all hover:opacity-90"
               style={{ background: Y, color: B }}
             >
-              Бесплатный аудит
+              Попробовать бесплатно
             </button>
             <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
               <Icon name={menuOpen ? "X" : "Menu"} size={22} />
@@ -220,236 +168,156 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Mobile menu */}
         {menuOpen && (
           <div className="md:hidden border-t border-black/8 bg-white px-5 py-4 flex flex-col gap-4">
             {NAV_LINKS.map((l) => (
               <a key={l} href={`#${l}`} className="text-sm text-black/70 hover:text-[#0f0f0f]" onClick={() => setMenuOpen(false)}>{l}</a>
             ))}
-            <a href="tel:+78001234567" className="text-sm font-semibold">8 800 123-45-67</a>
+            <button className="text-sm font-bold py-2.5 rounded-lg w-full" style={{ background: Y, color: B }}>
+              Попробовать бесплатно
+            </button>
           </div>
         )}
       </header>
 
       {/* ===== HERO ===== */}
-      <section className="pt-16 bg-[#0f0f0f] relative overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 40px, #fff 40px, #fff 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, #fff 40px, #fff 41px)"
-        }} />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-10 blur-[120px]" style={{ background: Y }} />
-
-        <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-16 pb-0 grid md:grid-cols-2 gap-10 items-center">
-          <div className="pb-16 md:pb-20">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6 border" style={{ borderColor: "rgba(254,195,10,0.4)", color: Y, background: "rgba(254,195,10,0.08)" }}>
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: Y }} />
-              Сео Ракета — продвижение в Яндексе
+      <section className="pt-32 pb-20 max-w-7xl mx-auto px-5 md:px-10">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-5 px-3 py-1.5 rounded-full border" style={{ color: Y, borderColor: "rgba(254,195,10,0.3)", background: "rgba(254,195,10,0.06)" }}>
+              <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: Y }} />
+              Автоматическое SEO-продвижение
             </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5" style={{ fontFamily: "'Oswald', sans-serif" }}>
-              ВЫВЕДЕМ ВАШ САЙТ<br />
-              <span style={{ color: Y }}>В ТОП ЯНДЕКСА</span><br />
-              КАК РАКЕТА 🚀
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-5" style={{ fontFamily: "'Oswald', sans-serif" }}>
+              ВЫВЕДИ САЙТ<br />
+              В ТОП ЯНДЕКСА<br />
+              <span style={{ color: Y }}>БЕЗ УСИЛИЙ</span>
             </h1>
-
-            <p className="text-white/55 text-lg leading-relaxed mb-8 max-w-lg">
-              Умные технологии SEO-продвижения. Увеличиваем трафик, заявки и продажи. Только белые методы — без риска санкций.
+            <p className="text-black/55 text-lg leading-relaxed mb-8 max-w-lg">
+              Подключаете сайт — сервис сам продвигает его в поиске. Никаких SEO-специалистов, подрядчиков и ручной работы.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-10">
               <button
-                className="font-bold px-7 py-4 rounded-xl text-base transition-all hover:scale-105"
+                className="flex items-center justify-center gap-2 font-bold px-6 py-3.5 rounded-xl text-sm transition-all hover:opacity-90"
                 style={{ background: Y, color: B }}
               >
-                Получить бесплатный аудит
+                <Icon name="Rocket" size={16} />
+                Начать бесплатно
               </button>
-              <button className="border border-white/20 text-white px-7 py-4 rounded-xl text-base hover:border-white/50 transition-all flex items-center justify-center gap-2">
-                <Icon name="Play" size={16} />
-                Как мы работаем
+              <button className="flex items-center justify-center gap-2 text-sm font-medium px-6 py-3.5 rounded-xl border border-black/12 hover:border-black/25 transition-all">
+                <Icon name="Play" size={14} />
+                Смотреть демо
               </button>
             </div>
 
-            {/* Mini stats */}
-            <div className="grid grid-cols-2 gap-4">
-              {STATS.map((s, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="text-2xl font-bold" style={{ color: Y, fontFamily: "'Oswald', sans-serif" }}>{s.value}</div>
-                  <div className="text-white/40 text-xs leading-tight">{s.label}</div>
-                </div>
-              ))}
+            <div className="flex items-center gap-2 text-xs text-black/40">
+              <Icon name="Check" size={13} className="text-emerald-500" />
+              Бесплатный период 14 дней · Без карты · Отмена в любой момент
             </div>
           </div>
 
-          {/* Dashboard image */}
-          <div className="relative hidden md:block">
-            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl" style={{ boxShadow: `0 0 80px rgba(254,195,10,0.15)` }}>
-              <img src={DASH_IMAGE} alt="SEO аналитика" className="w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f0f]/60 via-transparent to-transparent" />
+          {/* Dashboard preview */}
+          <div className="relative">
+            <div className="rounded-2xl overflow-hidden border border-black/8 shadow-2xl">
+              <img src={DASH_IMAGE} alt="Личный кабинет" className="w-full" />
             </div>
             {/* Floating badge */}
-            <div className="absolute -bottom-4 -left-6 rounded-xl px-4 py-3 border border-white/10 backdrop-blur-md bg-white/5">
-              <div className="text-xs text-white/50 mb-0.5">Рост трафика</div>
-              <div className="text-xl font-bold text-white flex items-center gap-1" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                <Icon name="TrendingUp" size={16} style={{ color: Y }} />
-                +340%
+            <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-4 py-3 shadow-xl border border-black/8 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "rgba(16,185,129,0.1)" }}>
+                <Icon name="TrendingUp" size={18} className="text-emerald-500" />
+              </div>
+              <div>
+                <div className="text-xs text-black/40">Рост позиций за месяц</div>
+                <div className="font-bold text-sm text-emerald-500">+47 запросов в ТОП-10</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== TICKER ===== */}
-      <div className="py-3 overflow-hidden" style={{ background: Y }}>
-        <div className="flex gap-12 text-sm font-bold text-[#0f0f0f] whitespace-nowrap animate-marquee" style={{ animation: "marquee 20s linear infinite" }}>
-          {Array(3).fill(["ТОП Яндекса", "Белые методы", "Рост трафика", "SEO-аудит бесплатно", "Результат за 30 дней", "430+ проектов", "Без рисков санкций"]).flat().map((t, i) => (
-            <span key={i} className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0f0f0f]/40" />
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* ===== SERVICES ===== */}
-      <section id="Услуги" className="py-20 max-w-7xl mx-auto px-5 md:px-10">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: Y }}>
-            <div className="h-px w-6" style={{ background: Y }} />
-            Что мы делаем
-            <div className="h-px w-6" style={{ background: Y }} />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>НАШИ УСЛУГИ</h2>
-          <p className="text-black/45 mt-2 max-w-xl mx-auto text-sm">Комплексное SEO-продвижение под ключ или отдельные услуги — выбирайте что нужно</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {SERVICES.map((s, i) => (
-            <div key={i} className="group p-6 rounded-2xl border border-black/8 hover:border-[#fec30a] transition-all duration-300 hover:shadow-[0_4px_30px_rgba(254,195,10,0.1)] bg-white cursor-default">
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-colors" style={{ background: "rgba(254,195,10,0.1)" }}>
-                <Icon name={s.icon as string} size={20} style={{ color: Y }} />
-              </div>
-              <h3 className="font-bold text-base mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>{s.title}</h3>
-              <p className="text-black/50 text-sm leading-relaxed">{s.desc}</p>
-              <div className="mt-4 flex items-center gap-1 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: Y }}>
-                Подробнее <Icon name="ArrowRight" size={12} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ===== HOW ===== */}
-      <section className="py-20 bg-[#0f0f0f]">
+      {/* ===== STATS ===== */}
+      <section className="py-12 border-y border-black/6 bg-[#f7f7f5]">
         <div className="max-w-7xl mx-auto px-5 md:px-10">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: Y }}>
-              <div className="h-px w-6" style={{ background: Y }} />
-              Процесс работы
-              <div className="h-px w-6" style={{ background: Y }} />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>КАК МЫ РАБОТАЕМ</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {STEPS.map((step, i) => (
-              <div key={i} className="relative p-6 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-[#fec30a]/40 transition-all">
-                <div className="text-5xl font-bold absolute top-5 right-5 leading-none select-none" style={{ color: "rgba(254,195,10,0.07)", fontFamily: "'Oswald', sans-serif" }}>
-                  {step.num}
-                </div>
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-4 text-xs font-bold" style={{ background: Y, color: B, fontFamily: "'Oswald', sans-serif" }}>
-                  {step.num}
-                </div>
-                <h3 className="font-bold text-white mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>{step.title}</h3>
-                <p className="text-white/40 text-sm leading-relaxed">{step.text}</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-black/8">
+            {STATS.map((s, i) => (
+              <div key={i} className="text-center md:px-8">
+                <div className="text-3xl md:text-4xl font-black mb-1" style={{ fontFamily: "'Oswald', sans-serif", color: B }}>{s.value}</div>
+                <div className="text-xs text-black/45 uppercase tracking-wider">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== TARIFFS ===== */}
-      <section id="Тарифы" className="py-20 max-w-7xl mx-auto px-5 md:px-10">
-        <div className="text-center mb-12">
+      {/* ===== КАК РАБОТАЕТ ===== */}
+      <section id="Как работает" className="py-24 max-w-7xl mx-auto px-5 md:px-10">
+        <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: Y }}>
             <div className="h-px w-6" style={{ background: Y }} />
-            Прозрачные цены
+            Просто как раз-два-три
             <div className="h-px w-6" style={{ background: Y }} />
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>ТАРИФЫ</h2>
-          <p className="text-black/45 mt-2 text-sm">Без скрытых платежей. Фиксированная цена с первого дня.</p>
+          <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>КАК ЭТО РАБОТАЕТ</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {TARIFFS.map((t, i) => (
-            <div
-              key={i}
-              className="relative rounded-2xl p-7 flex flex-col transition-all duration-300"
-              style={t.highlight
-                ? { background: B, border: `2px solid ${Y}`, boxShadow: `0 8px 40px rgba(254,195,10,0.2)` }
-                : { background: "white", border: "1px solid rgba(0,0,0,0.08)" }
-              }
-            >
-              {t.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold" style={{ background: Y, color: B }}>
-                  Популярный
-                </div>
+        <div className="grid md:grid-cols-3 gap-8">
+          {HOW.map((h, i) => (
+            <div key={i} className="relative">
+              {i < HOW.length - 1 && (
+                <div className="hidden md:block absolute top-10 left-[calc(50%+40px)] right-[-calc(50%-40px)] h-px border-t-2 border-dashed border-black/10 z-0" />
               )}
-
-              <div className="mb-5">
-                <div className="text-sm font-semibold uppercase tracking-wider mb-1" style={{ color: t.highlight ? Y : "rgba(0,0,0,0.4)" }}>
-                  {t.name}
+              <div className="relative z-10 text-center">
+                <div className="inline-flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-2xl flex items-center justify-center mb-5 relative" style={{ background: "rgba(254,195,10,0.1)" }}>
+                    <Icon name={h.icon} size={32} style={{ color: Y }} />
+                    <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-black" style={{ background: Y, color: B, fontFamily: "'Oswald', sans-serif" }}>{i + 1}</div>
+                  </div>
+                  <h3 className="font-bold text-lg mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>{h.title}</h3>
+                  <p className="text-black/50 text-sm leading-relaxed max-w-xs">{h.text}</p>
                 </div>
-                <div className="flex items-baseline gap-1 mb-1">
-                  <span className="text-4xl font-bold" style={{ color: t.highlight ? "white" : B, fontFamily: "'Oswald', sans-serif" }}>
-                    {t.price}
-                  </span>
-                  <span className="text-sm" style={{ color: t.highlight ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)" }}>₽/{t.period}</span>
-                </div>
-                <p className="text-xs" style={{ color: t.highlight ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)" }}>{t.desc}</p>
               </div>
-
-              <ul className="space-y-2.5 flex-1 mb-6">
-                {t.features.map((f, j) => (
-                  <li key={j} className="flex items-start gap-2.5 text-sm" style={{ color: t.highlight ? "rgba(255,255,255,0.75)" : "rgba(0,0,0,0.65)" }}>
-                    <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: Y }}>
-                      <Icon name="Check" size={10} style={{ color: B }} />
-                    </div>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                className="w-full py-3.5 rounded-xl font-bold text-sm transition-all hover:opacity-90"
-                style={t.highlight
-                  ? { background: Y, color: B }
-                  : { background: "rgba(0,0,0,0.06)", color: B }
-                }
-              >
-                Выбрать тариф
-              </button>
             </div>
           ))}
         </div>
       </section>
 
+      {/* ===== FEATURES ===== */}
+      <section className="py-24 bg-[#0f0f0f]">
+        <div className="max-w-7xl mx-auto px-5 md:px-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>ЧТО ДЕЛАЕТ СЕРВИС</h2>
+            <p className="text-white/40 mt-2 text-sm">Всё включено. Вы только наблюдаете.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {FEATURES.map((f, i) => (
+              <div key={i} className="rounded-2xl p-6 border border-white/8 hover:border-white/20 transition-all" style={{ background: "rgba(255,255,255,0.03)" }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ background: "rgba(254,195,10,0.12)" }}>
+                  <Icon name={f.icon} size={20} style={{ color: Y }} />
+                </div>
+                <h3 className="font-bold text-white mb-2 text-sm">{f.title}</h3>
+                <p className="text-white/40 text-sm leading-relaxed">{f.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ===== КЕЙСЫ — ПОЗИЦИИ ===== */}
-      <section id="Результаты" className="py-24 bg-[#0f0f0f]">
+      <section id="Результаты" className="py-24 bg-[#f7f7f5]">
         <div className="max-w-7xl mx-auto px-5 md:px-10">
 
-          {/* Header */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: Y }}>
               <div className="h-px w-6" style={{ background: Y }} />
               Топвизор — реальные данные
               <div className="h-px w-6" style={{ background: Y }} />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>РОСТ ПОЗИЦИЙ КЛИЕНТОВ</h2>
-            <p className="text-white/40 mt-2 text-sm">Данные из Топвизора. Реальные запросы, реальные позиции.</p>
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>РОСТ ПОЗИЦИЙ КЛИЕНТОВ</h2>
+            <p className="text-black/45 mt-2 text-sm">Реальные запросы, реальные позиции. Данные из Топвизора.</p>
           </div>
 
-          {/* Case tabs */}
+          {/* Tabs */}
           <div className="flex flex-col sm:flex-row gap-3 mb-8">
             {CASES.map((c, i) => (
               <button
@@ -457,12 +325,12 @@ export default function Index() {
                 onClick={() => setActiveCase(i)}
                 className="flex-1 text-left px-5 py-4 rounded-xl border transition-all duration-200"
                 style={activeCase === i
-                  ? { background: Y, borderColor: Y, color: B }
-                  : { background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)" }
+                  ? { background: B, borderColor: B, color: "#fff" }
+                  : { background: "#fff", borderColor: "rgba(0,0,0,0.1)", color: "rgba(0,0,0,0.45)" }
                 }
               >
                 <div className="font-bold text-sm" style={{ fontFamily: "'Oswald', sans-serif" }}>{c.niche}</div>
-                <div className="text-xs mt-0.5 opacity-60">{c.domain}</div>
+                <div className="text-xs mt-0.5 opacity-50">{c.domain}</div>
               </button>
             ))}
           </div>
@@ -471,94 +339,78 @@ export default function Index() {
           {CASES.map((c, i) => i !== activeCase ? null : (
             <div key={c.id} className="grid lg:grid-cols-3 gap-6">
 
-              {/* LEFT — таблица позиций */}
-              <div className="lg:col-span-2 rounded-2xl overflow-hidden border border-white/8">
-                {/* Table header */}
-                <div className="px-5 py-4 flex items-center justify-between border-b border-white/8" style={{ background: "rgba(255,255,255,0.04)" }}>
+              {/* Таблица */}
+              <div className="lg:col-span-2 rounded-2xl overflow-hidden border border-black/8 bg-white">
+                <div className="px-5 py-4 flex items-center justify-between border-b border-black/8 bg-black/[0.02]">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ background: Y }} />
-                    <span className="text-white text-sm font-semibold">Снятие позиций — {c.period}</span>
+                    <span className="text-sm font-semibold">Снятие позиций — {c.period}</span>
                   </div>
-                  <span className="text-xs text-white/30 flex items-center gap-1">
+                  <span className="text-xs text-black/30 flex items-center gap-1">
                     <Icon name="BarChart2" size={12} />
                     Топвизор
                   </span>
                 </div>
 
-                {/* Column headers */}
-                <div className="grid grid-cols-12 px-5 py-2.5 border-b border-white/5 bg-white/[0.02]">
-                  <div className="col-span-6 text-xs text-white/30 uppercase tracking-wider">Поисковый запрос</div>
-                  <div className="col-span-2 text-xs text-white/30 uppercase tracking-wider text-center">Было</div>
-                  <div className="col-span-2 text-xs text-white/30 uppercase tracking-wider text-center">Стало</div>
-                  <div className="col-span-2 text-xs text-white/30 uppercase tracking-wider text-center">Рост</div>
+                <div className="grid grid-cols-12 px-5 py-2.5 border-b border-black/5 bg-black/[0.01]">
+                  <div className="col-span-6 text-xs text-black/35 uppercase tracking-wider">Поисковый запрос</div>
+                  <div className="col-span-2 text-xs text-black/35 uppercase tracking-wider text-center">Было</div>
+                  <div className="col-span-2 text-xs text-black/35 uppercase tracking-wider text-center">Стало</div>
+                  <div className="col-span-2 text-xs text-black/35 uppercase tracking-wider text-center">Рост</div>
                 </div>
 
-                {/* Rows */}
                 {c.queries.map((q, qi) => {
                   const diff = q.was - q.now;
                   const isTop = q.now <= 10;
                   return (
-                    <div
-                      key={qi}
-                      className="grid grid-cols-12 px-5 py-3.5 border-b border-white/5 hover:bg-white/[0.03] transition-colors items-center"
-                    >
-                      <div className="col-span-6 text-sm text-white/75 truncate pr-4">{q.kw}</div>
-
-                      {/* WAS */}
+                    <div key={qi} className="grid grid-cols-12 px-5 py-3.5 border-b border-black/5 hover:bg-black/[0.015] transition-colors items-center">
+                      <div className="col-span-6 text-sm text-black/75 truncate pr-4">{q.kw}</div>
                       <div className="col-span-2 text-center">
-                        <span className="text-sm font-mono text-white/40 bg-white/5 px-2 py-0.5 rounded">{q.was}</span>
+                        <span className="text-sm font-mono text-black/35 bg-black/5 px-2 py-0.5 rounded">{q.was}</span>
                       </div>
-
-                      {/* NOW */}
                       <div className="col-span-2 text-center">
-                        <span
-                          className="text-sm font-bold font-mono px-2 py-0.5 rounded"
+                        <span className="text-sm font-bold font-mono px-2 py-0.5 rounded"
                           style={isTop
-                            ? { background: "rgba(254,195,10,0.15)", color: Y }
-                            : { background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.7)" }
+                            ? { background: "rgba(254,195,10,0.15)", color: "#b8870a" }
+                            : { background: "rgba(0,0,0,0.05)", color: "rgba(0,0,0,0.6)" }
                           }
                         >
                           {q.now}
                         </span>
                       </div>
-
-                      {/* DIFF */}
                       <div className="col-span-2 text-center flex items-center justify-center gap-1">
-                        <Icon name="ArrowUp" size={12} className="text-emerald-400" />
-                        <span className="text-sm font-bold text-emerald-400">+{diff}</span>
+                        <Icon name="ArrowUp" size={12} className="text-emerald-500" />
+                        <span className="text-sm font-bold text-emerald-600">+{diff}</span>
                       </div>
                     </div>
                   );
                 })}
 
-                {/* Legend */}
-                <div className="px-5 py-3 flex items-center gap-4 bg-white/[0.02]">
-                  <div className="flex items-center gap-1.5 text-xs text-white/30">
-                    <div className="w-3 h-3 rounded-sm" style={{ background: "rgba(254,195,10,0.15)", border: `1px solid ${Y}` }} />
+                <div className="px-5 py-3 flex items-center gap-4 bg-black/[0.01]">
+                  <div className="flex items-center gap-1.5 text-xs text-black/35">
+                    <div className="w-3 h-3 rounded-sm" style={{ background: "rgba(254,195,10,0.2)", border: "1px solid rgba(254,195,10,0.5)" }} />
                     ТОП-10
                   </div>
-                  <div className="flex items-center gap-1.5 text-xs text-white/30">
-                    <Icon name="ArrowUp" size={11} className="text-emerald-400" />
+                  <div className="flex items-center gap-1.5 text-xs text-black/35">
+                    <Icon name="ArrowUp" size={11} className="text-emerald-500" />
                     Рост позиции
                   </div>
                 </div>
               </div>
 
-              {/* RIGHT — stats */}
+              {/* Статы */}
               <div className="flex flex-col gap-4">
-
-                {/* Mini chart */}
-                <div className="rounded-2xl p-5 border border-white/8 bg-white/[0.03]">
-                  <div className="text-xs text-white/40 uppercase tracking-wider mb-4">Динамика средней позиции</div>
+                {/* Chart */}
+                <div className="rounded-2xl p-5 border border-black/8 bg-white">
+                  <div className="text-xs text-black/40 uppercase tracking-wider mb-4">Динамика средней позиции</div>
                   <div className="flex items-end gap-1.5 h-24 mb-3">
                     {c.chart.map((val, ci) => {
                       const maxVal = Math.max(...c.chart);
                       const heightPct = ((maxVal - val) / maxVal) * 100;
                       const isLast = ci === c.chart.length - 1;
                       return (
-                        <div key={ci} className="flex-1 flex flex-col items-center justify-end h-full gap-1">
-                          <div
-                            className="w-full rounded-t transition-all"
+                        <div key={ci} className="flex-1 flex flex-col justify-end h-full">
+                          <div className="w-full rounded-t transition-all"
                             style={{
                               height: `${Math.max(8, heightPct)}%`,
                               background: isLast ? Y : "rgba(254,195,10,0.25)",
@@ -568,40 +420,32 @@ export default function Index() {
                       );
                     })}
                   </div>
-                  <div className="flex justify-between text-xs text-white/25">
+                  <div className="flex justify-between text-xs text-black/30">
                     <span>Старт</span>
                     <span style={{ color: Y }}>Сейчас</span>
                   </div>
                 </div>
 
                 {/* KPIs */}
-                <div className="rounded-2xl p-5 border border-white/8 bg-white/[0.03] space-y-4">
+                <div className="rounded-2xl p-5 border border-black/8 bg-white space-y-4">
                   <div className="flex justify-between items-center">
-                    <div className="text-xs text-white/40">Рост трафика</div>
-                    <div className="text-xl font-bold" style={{ color: Y, fontFamily: "'Oswald', sans-serif" }}>{c.trafficGrowth}</div>
+                    <div className="text-xs text-black/40">Рост трафика</div>
+                    <div className="text-xl font-bold text-emerald-600" style={{ fontFamily: "'Oswald', sans-serif" }}>{c.trafficGrowth}</div>
                   </div>
-                  <div className="h-px bg-white/5" />
+                  <div className="h-px bg-black/5" />
                   <div className="flex justify-between items-center">
-                    <div className="text-xs text-white/40">Запросов в ТОП-10</div>
-                    <div className="text-xl font-bold text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>{c.topCount}</div>
+                    <div className="text-xs text-black/40">Запросов в ТОП-10</div>
+                    <div className="text-xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>{c.topCount}</div>
                   </div>
-                  <div className="h-px bg-white/5" />
+                  <div className="h-px bg-black/5" />
                   <div className="flex justify-between items-center">
-                    <div className="text-xs text-white/40">Срок работы</div>
-                    <div className="text-xl font-bold text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>{c.months}</div>
-                  </div>
-                  <div className="h-px bg-white/5" />
-                  <div className="flex justify-between items-center">
-                    <div className="text-xs text-white/40">Период</div>
-                    <div className="text-xs text-white/60">{c.period}</div>
+                    <div className="text-xs text-black/40">Срок</div>
+                    <div className="text-xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>{c.months}</div>
                   </div>
                 </div>
 
-                <button
-                  className="w-full py-3.5 rounded-xl font-bold text-sm transition-all hover:opacity-90"
-                  style={{ background: Y, color: B }}
-                >
-                  Хочу такие же результаты
+                <button className="w-full py-3.5 rounded-xl font-bold text-sm transition-all hover:opacity-90" style={{ background: Y, color: B }}>
+                  Попробовать бесплатно
                 </button>
               </div>
             </div>
@@ -609,178 +453,131 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ===== WHY US ===== */}
-      <section id="О нас" className="py-20 max-w-7xl mx-auto px-5 md:px-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: Y }}>
-              <div className="h-px w-6" style={{ background: Y }} />
-              Почему мы
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
-              СЕО РАКЕТА —<br />
-              <span style={{ color: Y }}>РЕАЛЬНЫЕ РЕЗУЛЬТАТЫ</span>
-            </h2>
-            <p className="text-black/50 text-sm leading-relaxed mb-8">
-              Мы не обещаем волшебства. Работаем системно, прозрачно и по данным. Каждое решение основано на аналитике, а не догадках.
-            </p>
+      {/* ===== ТАРИФЫ ===== */}
+      <section id="Тарифы" className="py-24 max-w-7xl mx-auto px-5 md:px-10">
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: Y }}>
+            <div className="h-px w-6" style={{ background: Y }} />
+            Подписка
+            <div className="h-px w-6" style={{ background: Y }} />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>ТАРИФЫ</h2>
+          <p className="text-black/45 mt-2 text-sm">14 дней бесплатно на любом тарифе</p>
+        </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {WHY.map((w, i) => (
-                <div key={i} className="flex gap-3">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(254,195,10,0.1)" }}>
-                    <Icon name={w.icon as string} size={18} style={{ color: Y }} />
-                  </div>
-                  <div>
-                    <div className="font-bold text-sm mb-1">{w.title}</div>
-                    <div className="text-black/45 text-xs leading-relaxed">{w.text}</div>
-                  </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {TARIFFS.map((t, i) => (
+            <div
+              key={i}
+              className="rounded-2xl p-7 border transition-all"
+              style={t.highlight
+                ? { background: B, borderColor: B, color: "#fff" }
+                : { background: "#fff", borderColor: "rgba(0,0,0,0.08)" }
+              }
+            >
+              {t.highlight && (
+                <div className="inline-block text-xs font-bold px-3 py-1 rounded-full mb-4" style={{ background: Y, color: B }}>
+                  Популярный
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Numbers */}
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { val: "7+", label: "лет опыта в SEO" },
-              { val: "430+", label: "успешных проектов" },
-              { val: "15", label: "экспертов в команде" },
-              { val: "94%", label: "клиентов продлевают договор" },
-            ].map((n, i) => (
-              <div key={i} className="rounded-2xl p-6 text-center" style={{ background: i === 1 ? B : "#f7f7f5" }}>
-                <div className="text-4xl font-bold mb-1" style={{ color: i === 1 ? Y : B, fontFamily: "'Oswald', sans-serif" }}>{n.val}</div>
-                <div className="text-xs" style={{ color: i === 1 ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.45)" }}>{n.label}</div>
+              )}
+              <div className="text-sm font-semibold mb-1" style={{ color: t.highlight ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.45)" }}>{t.desc}</div>
+              <div className="text-2xl font-black mb-1" style={{ fontFamily: "'Oswald', sans-serif" }}>{t.name}</div>
+              <div className="flex items-end gap-1 mb-6">
+                <span className="text-4xl font-black" style={{ fontFamily: "'Oswald', sans-serif", color: t.highlight ? Y : B }}>{t.price}</span>
+                <span className="text-sm mb-1" style={{ color: t.highlight ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)" }}>₽/мес</span>
               </div>
-            ))}
-          </div>
+
+              <div className="space-y-3 mb-7">
+                {t.features.map((f, fi) => (
+                  <div key={fi} className="flex items-center gap-2.5 text-sm">
+                    <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: t.highlight ? "rgba(254,195,10,0.2)" : "rgba(0,0,0,0.05)" }}>
+                      <Icon name="Check" size={10} style={{ color: t.highlight ? Y : "rgba(0,0,0,0.5)" }} />
+                    </div>
+                    <span style={{ color: t.highlight ? "rgba(255,255,255,0.75)" : "rgba(0,0,0,0.65)" }}>{f}</span>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                className="w-full py-3 rounded-xl font-bold text-sm transition-all hover:opacity-90"
+                style={t.highlight
+                  ? { background: Y, color: B }
+                  : { background: "rgba(0,0,0,0.06)", color: B }
+                }
+              >
+                Начать бесплатно
+              </button>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ===== FORM ===== */}
-      <section id="Контакты" className="py-20 bg-[#0f0f0f] relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full blur-[100px] opacity-15" style={{ background: Y }} />
-        <div className="relative max-w-2xl mx-auto px-5 md:px-10 text-center">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: Y }}>
-            <div className="h-px w-6" style={{ background: Y }} />
-            Начать продвижение
-            <div className="h-px w-6" style={{ background: Y }} />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>
-            ПОЛУЧИТЕ БЕСПЛАТНЫЙ АУДИТ
+      {/* ===== CTA ===== */}
+      <section className="py-24 bg-[#0f0f0f]">
+        <div className="max-w-2xl mx-auto px-5 md:px-10 text-center">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
+            НАЧНИТЕ РАСТИ<br />
+            <span style={{ color: Y }}>ПРЯМО СЕЙЧАС</span>
           </h2>
-          <p className="text-white/45 text-sm mb-8">
-            Оставьте заявку — свяжемся в течение часа, проведём аудит сайта и предложим стратегию продвижения
+          <p className="text-white/45 mb-10 text-sm">
+            Введите email — мы пришлём инструкцию по подключению первого сайта
           </p>
 
-          {sent ? (
-            <div className="rounded-2xl p-10 border text-center" style={{ borderColor: "rgba(254,195,10,0.3)", background: "rgba(254,195,10,0.05)" }}>
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: Y }}>
-                <Icon name="Check" size={24} style={{ color: B }} />
-              </div>
-              <div className="text-white font-bold text-lg mb-2">Заявка отправлена!</div>
-              <div className="text-white/45 text-sm">Свяжемся с вами в течение часа</div>
+          {emailSent ? (
+            <div className="flex items-center justify-center gap-2 text-emerald-400 font-semibold">
+              <Icon name="CheckCircle" size={20} />
+              Отлично! Проверьте почту
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="rounded-2xl p-7 border text-left space-y-4" style={{ borderColor: "rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.03)" }}>
-              <div>
-                <label className="block text-xs text-white/45 mb-1.5">Ваше имя</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Иван Петров"
-                  value={form.name}
-                  onChange={e => setForm({ ...form, name: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl text-sm text-white outline-none transition-all"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
-                  onFocus={e => e.target.style.borderColor = Y}
-                  onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
-                />
-              </div>
-              <div>
-                <label className="block text-xs text-white/45 mb-1.5">Телефон</label>
-                <input
-                  type="tel"
-                  required
-                  placeholder="+7 (999) 000-00-00"
-                  value={form.phone}
-                  onChange={e => setForm({ ...form, phone: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl text-sm text-white outline-none transition-all"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
-                  onFocus={e => e.target.style.borderColor = Y}
-                  onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
-                />
-              </div>
-              <div>
-                <label className="block text-xs text-white/45 mb-1.5">Адрес сайта</label>
-                <input
-                  type="url"
-                  placeholder="https://example.ru"
-                  value={form.site}
-                  onChange={e => setForm({ ...form, site: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl text-sm text-white outline-none transition-all"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
-                  onFocus={e => e.target.style.borderColor = Y}
-                  onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
-                />
-              </div>
+            <form
+              onSubmit={(e) => { e.preventDefault(); if (email) setEmailSent(true); }}
+              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+            >
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="ваш@email.ru"
+                className="flex-1 px-4 py-3.5 rounded-xl text-sm outline-none bg-white/8 border border-white/12 text-white placeholder-white/30 focus:border-white/30 transition-colors"
+              />
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl font-bold text-sm transition-all hover:opacity-90 hover:scale-[1.01]"
+                className="px-6 py-3.5 rounded-xl font-bold text-sm transition-all hover:opacity-90 whitespace-nowrap"
                 style={{ background: Y, color: B }}
               >
-                Получить бесплатный аудит →
+                Получить доступ
               </button>
-              <p className="text-center text-xs text-white/25">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
             </form>
           )}
+
+          <div className="mt-5 flex items-center justify-center gap-4 text-xs text-white/25">
+            <span className="flex items-center gap-1"><Icon name="Check" size={11} />14 дней бесплатно</span>
+            <span className="flex items-center gap-1"><Icon name="Check" size={11} />Без карты</span>
+            <span className="flex items-center gap-1"><Icon name="Check" size={11} />Отмена в 1 клик</span>
+          </div>
         </div>
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="bg-[#0a0a0a] border-t border-white/5 py-10">
-        <div className="max-w-7xl mx-auto px-5 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 rounded-lg overflow-hidden border flex-shrink-0" style={{ borderColor: "rgba(254,195,10,0.4)" }}>
-                  <img src={LOGO_IMAGE} alt="Сео Ракета" className="w-full h-full object-cover" />
-                </div>
-                <span className="font-bold text-white text-sm" style={{ fontFamily: "'Oswald', sans-serif" }}>СЕО<span style={{ color: Y }}> РАКЕТА</span></span>
-              </div>
-              <p className="text-white/35 text-xs leading-relaxed">SEO-продвижение в Яндексе. Выводим сайты в ТОП быстро и надёжно.</p>
+      <footer className="py-8 border-t border-black/8">
+        <div className="max-w-7xl mx-auto px-5 md:px-10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-md overflow-hidden border flex-shrink-0" style={{ borderColor: Y }}>
+              <img src={LOGO_IMAGE} alt="Сео Ракета" className="w-full h-full object-cover" />
             </div>
-            {[
-              { title: "Услуги", links: ["SEO-аудит", "Продвижение в Яндексе", "Контент", "Ссылки", "Локальное SEO"] },
-              { title: "Компания", links: ["О нас", "Команда", "Кейсы", "Блог", "Контакты"] },
-              { title: "Контакты", links: ["8 800 123-45-67", "info@умныйсервис.рф", "Москва, ул. Примерная 1", "Пн–Пт 9:00–18:00"] },
-            ].map((col, i) => (
-              <div key={i}>
-                <div className="text-white text-xs font-bold uppercase tracking-wider mb-3">{col.title}</div>
-                <ul className="space-y-2">
-                  {col.links.map((l, j) => (
-                    <li key={j}><a href="#" className="text-white/35 text-xs hover:text-white/70 transition-colors">{l}</a></li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <span className="font-bold text-sm" style={{ fontFamily: "'Oswald', sans-serif" }}>
+              СЕО<span style={{ color: Y }}> РАКЕТА</span>
+            </span>
           </div>
-          <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row justify-between gap-2 items-center">
-            <div className="text-white/25 text-xs">© 2024 Сео Ракета. Все права защищены.</div>
-            <div className="flex gap-4 text-white/25 text-xs">
-              <a href="#" className="hover:text-white/50 transition-colors">Политика конфиденциальности</a>
-              <a href="#" className="hover:text-white/50 transition-colors">Оферта</a>
-            </div>
+          <div className="text-xs text-black/35">© 2024 СЕО Ракета. Все права защищены.</div>
+          <div className="flex gap-5 text-xs text-black/40">
+            <a href="#" className="hover:text-black transition-colors">Политика конфиденциальности</a>
+            <a href="#" className="hover:text-black transition-colors">Оферта</a>
           </div>
         </div>
       </footer>
 
-      <style>{`
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-      `}</style>
     </div>
   );
 }
