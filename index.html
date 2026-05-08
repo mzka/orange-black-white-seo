@@ -34,9 +34,9 @@
     /* ===== NAV ===== */
     header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,0.95);
+      background: var(--y);
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
     }
     .nav-inner {
       display: flex; align-items: center; justify-content: space-between;
@@ -52,30 +52,30 @@
       font-family: 'Oswald', sans-serif; font-weight: 700;
       font-size: 16px; letter-spacing: 0.05em;
     }
-    .logo-text span { color: var(--y); }
+    .logo-text span { color: var(--b); }
 
     nav { display: flex; gap: 28px; }
-    nav a { font-size: 14px; color: rgba(0,0,0,0.55); transition: color .2s; }
+    nav a { font-size: 14px; color: rgba(0,0,0,0.6); transition: color .2s; }
     nav a:hover { color: var(--b); }
 
     .nav-right { display: flex; align-items: center; gap: 12px; }
-    .btn-login { font-size: 14px; font-weight: 500; color: rgba(0,0,0,0.6); transition: color .2s; }
+    .btn-login { font-size: 14px; font-weight: 500; color: rgba(0,0,0,0.65); transition: color .2s; }
     .btn-login:hover { color: var(--b); }
 
     .btn-primary {
       font-size: 14px; font-weight: 700;
       padding: 8px 16px; border-radius: 8px;
-      background: var(--y); color: var(--b);
+      background: var(--b); color: var(--y);
       transition: opacity .2s;
     }
-    .btn-primary:hover { opacity: 0.88; }
+    .btn-primary:hover { opacity: 0.85; }
 
     .burger { display: none; background: none; border: none; cursor: pointer; }
 
     .mobile-menu {
       display: none; flex-direction: column; gap: 16px;
-      border-top: 1px solid var(--border);
-      background: #fff; padding: 16px 20px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      background: var(--y); padding: 16px 20px;
     }
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-size: 14px; color: rgba(0,0,0,0.7); }
@@ -568,7 +568,7 @@
     <a href="#results" onclick="closeMenu()">Результаты</a>
     <a href="#tariffs" onclick="closeMenu()">Тарифы</a>
     <a href="#faq" onclick="closeMenu()">FAQ</a>
-    <button class="btn-primary" style="border-radius:8px;padding:10px;font-family:inherit;">7 дней бесплатно</button>
+    <button class="btn-primary" style="border-radius:8px;padding:10px;font-family:inherit;background:var(--b);color:var(--y);">7 дней бесплатно</button>
   </div>
 </header>
 
