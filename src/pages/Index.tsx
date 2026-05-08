@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Icon from "@/components/ui/icon";
 
 const DASH_IMAGE = "https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7db5da15f7/files/adc27d5b-3383-4ce1-9ad1-b1fbb9b82616.jpg";
@@ -122,6 +122,35 @@ export default function Index() {
   const [form, setForm] = useState({ name: "", phone: "", site: "" });
   const [sent, setSent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Топвизор — скриншоты позиций
+  type PositionReport = { id: number; title: string; date: string; img: string };
+  const [reports, setReports] = useState<PositionReport[]>([]);
+  const [reportTitle, setReportTitle] = useState("");
+  const [dragOver, setDragOver] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleReportFile = (file: File) => {
+    if (!file.type.startsWith("image/")) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = e.target?.result as string;
+      const title = reportTitle.trim() || file.name.replace(/\.[^.]+$/, "");
+      const date = new Date().toLocaleDateString("ru-RU", { day: "2-digit", month: "2-digit", year: "numeric" });
+      setReports((prev) => [{ id: Date.now(), title, date, img }, ...prev]);
+      setReportTitle("");
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDragOver(false);
+    const file = e.dataTransfer.files[0];
+    if (file) handleReportFile(file);
+  };
+
+  const removeReport = (id: number) => setReports((prev) => prev.filter((r) => r.id !== id));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -421,6 +450,108 @@ export default function Index() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ===== ТОПВИЗОР — ПОЗИЦИИ ===== */}
+      <section className="py-20 max-w-7xl mx-auto px-5 md:px-10">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: Y }}>
+            <div className="h-px w-6" style={{ background: Y }} />
+            Снятие позиций
+            <div className="h-px w-6" style={{ background: Y }} />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>ПОЗИЦИИ ИЗ ТОПВИЗОРА</h2>
+          <p className="text-black/45 mt-2 text-sm max-w-lg mx-auto">Загружайте скриншоты из Топвизора — они будут отображаться на сайте как доказательство роста позиций</p>
+        </div>
+
+        {/* Upload area */}
+        <div className="max-w-2xl mx-auto mb-10">
+          <div className="mb-3">
+            <input
+              type="text"
+              placeholder="Название отчёта (например: Юридические услуги — май 2024)"
+              value={reportTitle}
+              onChange={(e) => setReportTitle(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl border border-black/12 text-sm outline-none transition-all bg-white"
+              onFocus={(e) => (e.target.style.borderColor = Y)}
+              onBlur={(e) => (e.target.style.borderColor = "rgba(0,0,0,0.12)")}
+            />
+          </div>
+
+          <div
+            className="relative rounded-2xl border-2 border-dashed transition-all cursor-pointer flex flex-col items-center justify-center py-10 px-6 text-center"
+            style={{
+              borderColor: dragOver ? Y : "rgba(0,0,0,0.15)",
+              background: dragOver ? "rgba(254,195,10,0.04)" : "#fafafa",
+            }}
+            onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={handleDrop}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => { const f = e.target.files?.[0]; if (f) handleReportFile(f); e.target.value = ""; }}
+            />
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-colors" style={{ background: dragOver ? Y : "rgba(254,195,10,0.1)" }}>
+              <Icon name="Upload" size={24} style={{ color: dragOver ? B : Y }} />
+            </div>
+            <div className="font-semibold text-sm text-[#0f0f0f] mb-1">
+              {dragOver ? "Отпустите файл" : "Перетащите скриншот или нажмите"}
+            </div>
+            <div className="text-xs text-black/40">PNG, JPG, WEBP — любой скриншот из Топвизора</div>
+          </div>
+        </div>
+
+        {/* Reports grid */}
+        {reports.length === 0 ? (
+          <div className="text-center py-12 rounded-2xl border border-dashed border-black/10 bg-[#fafafa]">
+            <Icon name="BarChart2" size={36} className="mx-auto mb-3 opacity-20" />
+            <div className="text-black/35 text-sm">Загруженные отчёты появятся здесь</div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {reports.map((r) => (
+              <div key={r.id} className="group relative rounded-2xl border border-black/8 overflow-hidden bg-white hover:border-[#fec30a] hover:shadow-[0_4px_30px_rgba(254,195,10,0.1)] transition-all">
+                {/* Image */}
+                <div className="relative aspect-video overflow-hidden bg-black/5">
+                  <img src={r.img} alt={r.title} className="w-full h-full object-cover" />
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                    <a href={r.img} target="_blank" rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                      style={{ background: Y }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Icon name="Maximize2" size={16} style={{ color: B }} />
+                    </a>
+                    <button
+                      className="w-10 h-10 rounded-full flex items-center justify-center bg-white/15 hover:bg-red-500 transition-colors"
+                      onClick={() => removeReport(r.id)}
+                    >
+                      <Icon name="Trash2" size={16} className="text-white" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Info */}
+                <div className="p-4">
+                  <div className="font-semibold text-sm text-[#0f0f0f] mb-1 leading-tight">{r.title}</div>
+                  <div className="flex items-center gap-1.5 text-xs text-black/40">
+                    <Icon name="Calendar" size={11} />
+                    Добавлено {r.date}
+                  </div>
+                </div>
+
+                {/* Yellow accent bar */}
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: Y }} />
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ===== WHY US ===== */}
