@@ -7,7 +7,7 @@ const DASH_IMAGE = "https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7
 const Y = "#fec30a";
 const B = "#0f0f0f";
 
-const NAV_LINKS = ["Как работает", "Результаты", "Тарифы"];
+const NAV_LINKS = ["Как работает", "Результаты", "Тарифы", "FAQ"];
 
 const STATS = [
   { value: "430+", label: "сайтов уже в ТОП" },
@@ -18,19 +18,16 @@ const STATS = [
 
 const HOW = [
   {
-    num: "01",
     icon: "Globe",
     title: "Подключаете сайт",
     text: "Вводите адрес сайта, выбираете тематику и регион. Никакого доступа к коду — только URL.",
   },
   {
-    num: "02",
     icon: "Cpu",
     title: "Сервис всё делает сам",
     text: "Алгоритм анализирует конкурентов, оптимизирует страницы и работает с факторами ранжирования Яндекса.",
   },
   {
-    num: "03",
     icon: "TrendingUp",
     title: "Наблюдаете за ростом",
     text: "В личном кабинете видите позиции в реальном времени. График идёт вверх — вы просто наблюдаете.",
@@ -42,6 +39,15 @@ const FEATURES = [
   { icon: "BarChart2", title: "Позиции в реальном времени", text: "Личный кабинет показывает текущие позиции по каждому запросу. Данные обновляются ежедневно." },
   { icon: "Shield", title: "Только белые методы", text: "Работаем строго по требованиям Яндекса. Никаких рисков санкций и фильтров." },
   { icon: "Eye", title: "Прозрачная аналитика", text: "Видите каждое действие системы: что сделано, какой результат, какая позиция сейчас." },
+];
+
+const VS = [
+  { param: "Стоимость в месяц", seo: "от 30 000 ₽", us: "от 2 900 ₽" },
+  { param: "Время запуска", seo: "2–4 недели", us: "5 минут" },
+  { param: "Прозрачность", seo: "Отчёт раз в месяц", us: "Данные в реальном времени" },
+  { param: "Зависимость", seo: "Один человек = риск", us: "Сервис работает 24/7" },
+  { param: "Первые результаты", seo: "3–6 месяцев", us: "От 30 дней" },
+  { param: "Управление", seo: "Звонки, согласования", us: "Личный кабинет" },
 ];
 
 const TARIFFS = [
@@ -125,11 +131,39 @@ const CASES = [
   },
 ];
 
+const FAQ = [
+  {
+    q: "Нужен ли мне доступ к сайту или коду?",
+    a: "Нет. Вы просто указываете URL сайта. Всё остальное сервис делает через анализ и внешнюю оптимизацию. Доступ к панели управления сайтом не нужен.",
+  },
+  {
+    q: "Когда будут первые результаты?",
+    a: "Первые движения в позициях заметны через 2–4 недели. Устойчивый рост — от 30 дней. Сроки зависят от конкурентности ниши и возраста сайта.",
+  },
+  {
+    q: "Это безопасно для сайта? Не попаду под санкции Яндекса?",
+    a: "Сервис использует только белые методы: работа с семантикой, поведенческими факторами и внешними сигналами в рамках требований Яндекса. Санкции исключены.",
+  },
+  {
+    q: "Можно подключить несколько сайтов?",
+    a: "Да. На тарифе «Бизнес» — до 5 сайтов, на «Про» — без ограничений. Каждый сайт продвигается отдельно в своём личном кабинете.",
+  },
+  {
+    q: "Что будет после 7 бесплатных дней?",
+    a: "После пробного периода вы выбираете подходящий тариф и продолжаете продвижение. Никакого автоматического списания — только если вы сами подключите оплату.",
+  },
+  {
+    q: "Подходит ли для любой ниши?",
+    a: "Сервис работает с большинством коммерческих ниш: услуги, e-commerce, клиники, юристы, строительство и другие. Перед стартом алгоритм оценивает конкурентность.",
+  },
+];
+
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCase, setActiveCase] = useState(0);
   const [email, setEmail] = useState("");
   const [emailSent, setEmailSent] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-white text-[#0f0f0f]" style={{ fontFamily: "'Golos Text', sans-serif" }}>
@@ -156,11 +190,8 @@ export default function Index() {
             <button className="hidden md:block text-sm font-medium text-black/60 hover:text-black transition-colors">
               Войти
             </button>
-            <button
-              className="text-sm font-bold px-4 py-2 rounded-lg transition-all hover:opacity-90"
-              style={{ background: Y, color: B }}
-            >
-              Попробовать бесплатно
+            <button className="text-sm font-bold px-4 py-2 rounded-lg transition-all hover:opacity-90" style={{ background: Y, color: B }}>
+              7 дней бесплатно
             </button>
             <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
               <Icon name={menuOpen ? "X" : "Menu"} size={22} />
@@ -174,7 +205,7 @@ export default function Index() {
               <a key={l} href={`#${l}`} className="text-sm text-black/70 hover:text-[#0f0f0f]" onClick={() => setMenuOpen(false)}>{l}</a>
             ))}
             <button className="text-sm font-bold py-2.5 rounded-lg w-full" style={{ background: Y, color: B }}>
-              Попробовать бесплатно
+              7 дней бесплатно
             </button>
           </div>
         )}
@@ -197,13 +228,10 @@ export default function Index() {
               Подключаете сайт — сервис сам продвигает его в поиске. Никаких SEO-специалистов, подрядчиков и ручной работы.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-10">
-              <button
-                className="flex items-center justify-center gap-2 font-bold px-6 py-3.5 rounded-xl text-sm transition-all hover:opacity-90"
-                style={{ background: Y, color: B }}
-              >
+            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+              <button className="flex items-center justify-center gap-2 font-bold px-6 py-3.5 rounded-xl text-sm transition-all hover:opacity-90" style={{ background: Y, color: B }}>
                 <Icon name="Rocket" size={16} />
-                Начать бесплатно
+                Начать — 7 дней бесплатно
               </button>
               <button className="flex items-center justify-center gap-2 text-sm font-medium px-6 py-3.5 rounded-xl border border-black/12 hover:border-black/25 transition-all">
                 <Icon name="Play" size={14} />
@@ -211,18 +239,21 @@ export default function Index() {
               </button>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-black/40">
-              <Icon name="Check" size={13} className="text-emerald-500" />
-              Бесплатный период 14 дней · Без карты · Отмена в любой момент
+            {/* Free period badge */}
+            <div className="inline-flex items-center gap-3 px-4 py-3 rounded-xl border border-black/8 bg-[#f7f7f5]">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(254,195,10,0.15)" }}>
+                <Icon name="Gift" size={16} style={{ color: Y }} />
+              </div>
+              <div className="text-xs text-black/55 leading-snug">
+                <span className="font-bold text-black">7 дней продвижения бесплатно</span> — без карты, отмена в любой момент
+              </div>
             </div>
           </div>
 
-          {/* Dashboard preview */}
           <div className="relative">
             <div className="rounded-2xl overflow-hidden border border-black/8 shadow-2xl">
               <img src={DASH_IMAGE} alt="Личный кабинет" className="w-full" />
             </div>
-            {/* Floating badge */}
             <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-4 py-3 shadow-xl border border-black/8 flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "rgba(16,185,129,0.1)" }}>
                 <Icon name="TrendingUp" size={18} className="text-emerald-500" />
@@ -303,6 +334,50 @@ export default function Index() {
         </div>
       </section>
 
+      {/* ===== VS SEO-СПЕЦИАЛИСТ ===== */}
+      <section className="py-24 max-w-7xl mx-auto px-5 md:px-10">
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: Y }}>
+            <div className="h-px w-6" style={{ background: Y }} />
+            Сравнение
+            <div className="h-px w-6" style={{ background: Y }} />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>МЫ VS SEO-СПЕЦИАЛИСТ</h2>
+          <p className="text-black/45 mt-2 text-sm">Почему сервис выгоднее найма подрядчика</p>
+        </div>
+
+        <div className="rounded-2xl border border-black/8 overflow-hidden">
+          {/* Header */}
+          <div className="grid grid-cols-3 bg-[#f7f7f5] border-b border-black/8">
+            <div className="px-6 py-4 text-sm font-semibold text-black/40 uppercase tracking-wider">Параметр</div>
+            <div className="px-6 py-4 text-sm font-semibold text-black/40 uppercase tracking-wider text-center border-l border-black/8">SEO-специалист</div>
+            <div className="px-6 py-4 text-sm font-bold text-center border-l border-black/8" style={{ color: Y }}>
+              <span style={{ fontFamily: "'Oswald', sans-serif" }}>СЕО РАКЕТА</span>
+            </div>
+          </div>
+
+          {VS.map((row, i) => (
+            <div key={i} className={`grid grid-cols-3 border-b border-black/5 ${i % 2 === 0 ? "bg-white" : "bg-[#fafafa]"}`}>
+              <div className="px-6 py-4 text-sm font-medium text-black/70">{row.param}</div>
+              <div className="px-6 py-4 text-sm text-black/40 text-center border-l border-black/5 flex items-center justify-center gap-1.5">
+                <Icon name="X" size={13} className="text-red-400 flex-shrink-0" />
+                {row.seo}
+              </div>
+              <div className="px-6 py-4 text-sm font-semibold text-center border-l border-black/5 flex items-center justify-center gap-1.5" style={{ color: "#16a34a" }}>
+                <Icon name="Check" size={13} className="flex-shrink-0" />
+                {row.us}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <button className="font-bold px-8 py-3.5 rounded-xl text-sm transition-all hover:opacity-90" style={{ background: Y, color: B }}>
+            Попробовать 7 дней бесплатно
+          </button>
+        </div>
+      </section>
+
       {/* ===== КЕЙСЫ — ПОЗИЦИИ ===== */}
       <section id="Результаты" className="py-24 bg-[#f7f7f5]">
         <div className="max-w-7xl mx-auto px-5 md:px-10">
@@ -317,7 +392,6 @@ export default function Index() {
             <p className="text-black/45 mt-2 text-sm">Реальные запросы, реальные позиции. Данные из Топвизора.</p>
           </div>
 
-          {/* Tabs */}
           <div className="flex flex-col sm:flex-row gap-3 mb-8">
             {CASES.map((c, i) => (
               <button
@@ -335,11 +409,9 @@ export default function Index() {
             ))}
           </div>
 
-          {/* Active case */}
           {CASES.map((c, i) => i !== activeCase ? null : (
             <div key={c.id} className="grid lg:grid-cols-3 gap-6">
 
-              {/* Таблица */}
               <div className="lg:col-span-2 rounded-2xl overflow-hidden border border-black/8 bg-white">
                 <div className="px-5 py-4 flex items-center justify-between border-b border-black/8 bg-black/[0.02]">
                   <div className="flex items-center gap-2">
@@ -398,9 +470,7 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* Статы */}
               <div className="flex flex-col gap-4">
-                {/* Chart */}
                 <div className="rounded-2xl p-5 border border-black/8 bg-white">
                   <div className="text-xs text-black/40 uppercase tracking-wider mb-4">Динамика средней позиции</div>
                   <div className="flex items-end gap-1.5 h-24 mb-3">
@@ -411,10 +481,7 @@ export default function Index() {
                       return (
                         <div key={ci} className="flex-1 flex flex-col justify-end h-full">
                           <div className="w-full rounded-t transition-all"
-                            style={{
-                              height: `${Math.max(8, heightPct)}%`,
-                              background: isLast ? Y : "rgba(254,195,10,0.25)",
-                            }}
+                            style={{ height: `${Math.max(8, heightPct)}%`, background: isLast ? Y : "rgba(254,195,10,0.25)" }}
                           />
                         </div>
                       );
@@ -426,7 +493,6 @@ export default function Index() {
                   </div>
                 </div>
 
-                {/* KPIs */}
                 <div className="rounded-2xl p-5 border border-black/8 bg-white space-y-4">
                   <div className="flex justify-between items-center">
                     <div className="text-xs text-black/40">Рост трафика</div>
@@ -445,7 +511,7 @@ export default function Index() {
                 </div>
 
                 <button className="w-full py-3.5 rounded-xl font-bold text-sm transition-all hover:opacity-90" style={{ background: Y, color: B }}>
-                  Попробовать бесплатно
+                  Попробовать 7 дней бесплатно
                 </button>
               </div>
             </div>
@@ -462,7 +528,7 @@ export default function Index() {
             <div className="h-px w-6" style={{ background: Y }} />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>ТАРИФЫ</h2>
-          <p className="text-black/45 mt-2 text-sm">14 дней бесплатно на любом тарифе</p>
+          <p className="text-black/45 mt-2 text-sm">7 дней продвижения бесплатно на любом тарифе · Без карты</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -505,16 +571,56 @@ export default function Index() {
                   : { background: "rgba(0,0,0,0.06)", color: B }
                 }
               >
-                Начать бесплатно
+                7 дней бесплатно
               </button>
             </div>
           ))}
         </div>
       </section>
 
+      {/* ===== FAQ ===== */}
+      <section id="FAQ" className="py-24 bg-[#f7f7f5]">
+        <div className="max-w-3xl mx-auto px-5 md:px-10">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: Y }}>
+              <div className="h-px w-6" style={{ background: Y }} />
+              Вопросы и ответы
+              <div className="h-px w-6" style={{ background: Y }} />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>ЧАСТЫЕ ВОПРОСЫ</h2>
+          </div>
+
+          <div className="space-y-3">
+            {FAQ.map((item, i) => (
+              <div key={i} className="rounded-2xl border border-black/8 bg-white overflow-hidden">
+                <button
+                  className="w-full px-6 py-5 flex items-center justify-between text-left gap-4 hover:bg-black/[0.01] transition-colors"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                >
+                  <span className="font-semibold text-sm">{item.q}</span>
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all" style={{ background: openFaq === i ? Y : "rgba(0,0,0,0.06)" }}>
+                    <Icon name={openFaq === i ? "Minus" : "Plus"} size={12} style={{ color: openFaq === i ? B : "rgba(0,0,0,0.5)" }} />
+                  </div>
+                </button>
+                {openFaq === i && (
+                  <div className="px-6 pb-5">
+                    <div className="h-px bg-black/5 mb-4" />
+                    <p className="text-sm text-black/55 leading-relaxed">{item.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ===== CTA ===== */}
       <section className="py-24 bg-[#0f0f0f]">
         <div className="max-w-2xl mx-auto px-5 md:px-10 text-center">
+          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-5 px-3 py-1.5 rounded-full border" style={{ color: Y, borderColor: "rgba(254,195,10,0.25)", background: "rgba(254,195,10,0.06)" }}>
+            <Icon name="Gift" size={12} style={{ color: Y }} />
+            7 дней продвижения — бесплатно
+          </div>
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
             НАЧНИТЕ РАСТИ<br />
             <span style={{ color: Y }}>ПРЯМО СЕЙЧАС</span>
@@ -546,13 +652,13 @@ export default function Index() {
                 className="px-6 py-3.5 rounded-xl font-bold text-sm transition-all hover:opacity-90 whitespace-nowrap"
                 style={{ background: Y, color: B }}
               >
-                Получить доступ
+                7 дней бесплатно
               </button>
             </form>
           )}
 
           <div className="mt-5 flex items-center justify-center gap-4 text-xs text-white/25">
-            <span className="flex items-center gap-1"><Icon name="Check" size={11} />14 дней бесплатно</span>
+            <span className="flex items-center gap-1"><Icon name="Check" size={11} />7 дней бесплатно</span>
             <span className="flex items-center gap-1"><Icon name="Check" size={11} />Без карты</span>
             <span className="flex items-center gap-1"><Icon name="Check" size={11} />Отмена в 1 клик</span>
           </div>
