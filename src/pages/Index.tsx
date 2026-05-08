@@ -281,6 +281,31 @@ export default function Index() {
         </div>
       </section>
 
+      {/* ===== MARQUEE ===== */}
+      <div className="py-4 overflow-hidden border-b border-black/6" style={{ background: Y }}>
+        <div className="flex animate-marquee whitespace-nowrap" style={{ width: "max-content" }}>
+          {Array.from({ length: 2 }).map((_, gi) => (
+            <div key={gi} className="flex items-center">
+              {[
+                "Автоматическое продвижение",
+                "Рост позиций в Яндексе",
+                "Без SEO-специалистов",
+                "Личный кабинет 24/7",
+                "Первые результаты от 30 дней",
+                "7 дней бесплатно",
+                "Только белые методы",
+                "Прозрачная аналитика",
+              ].map((text, i) => (
+                <span key={i} className="flex items-center gap-4 px-6 text-sm font-bold uppercase tracking-widest" style={{ color: B }}>
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: B, opacity: 0.4 }} />
+                  {text}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ===== КАК РАБОТАЕТ ===== */}
       <section id="Как работает" className="py-24 max-w-7xl mx-auto px-5 md:px-10">
         <div className="text-center mb-16">
