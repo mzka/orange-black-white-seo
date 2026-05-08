@@ -2,6 +2,7 @@ import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const DASH_IMAGE = "https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7db5da15f7/files/adc27d5b-3383-4ce1-9ad1-b1fbb9b82616.jpg";
+const LOGO_IMAGE = "https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7db5da15f7/files/c452687c-8fc1-4883-9cf1-d825aa7e8bd8.jpg";
 
 const Y = "#fec30a";
 const B = "#0f0f0f";
@@ -134,11 +135,11 @@ export default function Index() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-black/8">
         <div className="max-w-7xl mx-auto px-5 md:px-10 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2 shrink-0">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center font-bold text-sm" style={{ background: Y, color: B, fontFamily: "'Oswald', sans-serif" }}>
-              US
+            <div className="w-9 h-9 rounded-lg overflow-hidden border-2 flex-shrink-0" style={{ borderColor: Y }}>
+              <img src={LOGO_IMAGE} alt="Сео Ракета" className="w-full h-full object-cover" />
             </div>
             <span className="font-bold text-base tracking-wide" style={{ fontFamily: "'Oswald', sans-serif" }}>
-              УМНЫЙ<span style={{ color: Y }}>СЕРВИС</span>
+              СЕО<span style={{ color: Y }}> РАКЕТА</span>
             </span>
           </a>
 
@@ -189,13 +190,13 @@ export default function Index() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6 border" style={{ borderColor: "rgba(254,195,10,0.4)", color: Y, background: "rgba(254,195,10,0.08)" }}>
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: Y }} />
-              Продвижение в Яндексе
+              Сео Ракета — продвижение в Яндексе
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5" style={{ fontFamily: "'Oswald', sans-serif" }}>
               ВЫВЕДЕМ ВАШ САЙТ<br />
               <span style={{ color: Y }}>В ТОП ЯНДЕКСА</span><br />
-              ЗА 30 ДНЕЙ
+              КАК РАКЕТА 🚀
             </h1>
 
             <p className="text-white/55 text-lg leading-relaxed mb-8 max-w-lg">
@@ -431,11 +432,11 @@ export default function Index() {
               Почему мы
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Oswald', sans-serif" }}>
-              УМНЫЙ ПОДХОД —<br />
+              СЕО РАКЕТА —<br />
               <span style={{ color: Y }}>РЕАЛЬНЫЕ РЕЗУЛЬТАТЫ</span>
             </h2>
             <p className="text-black/50 text-sm leading-relaxed mb-8">
-              Мы не обещаем волшебства. Мы работаем системно, прозрачно и по данным. Каждое решение основано на аналитике, а не догадках.
+              Мы не обещаем волшебства. Работаем системно, прозрачно и по данным. Каждое решение основано на аналитике, а не догадках.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -556,10 +557,12 @@ export default function Index() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs" style={{ background: Y, color: B, fontFamily: "'Oswald', sans-serif" }}>US</div>
-                <span className="font-bold text-white text-sm" style={{ fontFamily: "'Oswald', sans-serif" }}>УМНЫЙ<span style={{ color: Y }}>СЕРВИС</span></span>
+                <div className="w-8 h-8 rounded-lg overflow-hidden border flex-shrink-0" style={{ borderColor: "rgba(254,195,10,0.4)" }}>
+                  <img src={LOGO_IMAGE} alt="Сео Ракета" className="w-full h-full object-cover" />
+                </div>
+                <span className="font-bold text-white text-sm" style={{ fontFamily: "'Oswald', sans-serif" }}>СЕО<span style={{ color: Y }}> РАКЕТА</span></span>
               </div>
-              <p className="text-white/35 text-xs leading-relaxed">SEO-продвижение в Яндексе. Умные технологии для реального роста вашего бизнеса.</p>
+              <p className="text-white/35 text-xs leading-relaxed">SEO-продвижение в Яндексе. Выводим сайты в ТОП быстро и надёжно.</p>
             </div>
             {[
               { title: "Услуги", links: ["SEO-аудит", "Продвижение в Яндексе", "Контент", "Ссылки", "Локальное SEO"] },
@@ -577,7 +580,7 @@ export default function Index() {
             ))}
           </div>
           <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row justify-between gap-2 items-center">
-            <div className="text-white/25 text-xs">© 2024 Умный Сервис. Все права защищены.</div>
+            <div className="text-white/25 text-xs">© 2024 Сео Ракета. Все права защищены.</div>
             <div className="flex gap-4 text-white/25 text-xs">
               <a href="#" className="hover:text-white/50 transition-colors">Политика конфиденциальности</a>
               <a href="#" className="hover:text-white/50 transition-colors">Оферта</a>
