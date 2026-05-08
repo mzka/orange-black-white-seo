@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const DASH_IMAGE = "https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7db5da15f7/files/adc27d5b-3383-4ce1-9ad1-b1fbb9b82616.jpg";
@@ -112,45 +112,70 @@ const WHY = [
   { icon: "Users", title: "Команда экспертов", text: "15 специалистов: SEO-аналитики, контентщики, технари и линкбилдеры." },
 ];
 
-const RESULTS = [
-  { site: "Интернет-магазин электроники", before: "82 позиция", after: "ТОП-3", growth: "+340% трафика", months: "6 мес" },
-  { site: "Юридическая компания", before: "Не в ТОП-100", after: "ТОП-5", growth: "+180% заявок", months: "4 мес" },
-  { site: "Стоматологическая клиника", before: "45 позиция", after: "ТОП-7", growth: "+220% визитов", months: "5 мес" },
+const CASES = [
+  {
+    id: 0,
+    niche: "Юридические услуги",
+    domain: "pravo-consult.ru",
+    period: "Март → Август 2024",
+    months: "5 мес",
+    trafficGrowth: "+218%",
+    topCount: 12,
+    queries: [
+      { kw: "юрист по недвижимости москва",  was: 54,  now: 3  },
+      { kw: "составить договор купли продажи", was: 89,  now: 5  },
+      { kw: "юридическая консультация онлайн", was: 43,  now: 2  },
+      { kw: "раздел имущества при разводе",    was: 120, now: 7  },
+      { kw: "арбитражный юрист цена",          was: 67,  now: 4  },
+      { kw: "услуги адвоката по уголовным",    was: 95,  now: 9  },
+    ],
+    chart: [68, 55, 44, 32, 18, 9, 4],
+  },
+  {
+    id: 1,
+    niche: "Стоматология",
+    domain: "smile-clinic.ru",
+    period: "Январь → Май 2024",
+    months: "4 мес",
+    trafficGrowth: "+310%",
+    topCount: 18,
+    queries: [
+      { kw: "имплантация зубов под ключ",     was: 78,  now: 3  },
+      { kw: "виниры цена москва",             was: 102, now: 6  },
+      { kw: "лечение зубов без боли",         was: 56,  now: 2  },
+      { kw: "брекеты взрослым стоимость",     was: 88,  now: 5  },
+      { kw: "удаление зуба мудрости цена",    was: 34,  now: 1  },
+      { kw: "протезирование зубов москва",    was: 145, now: 8  },
+    ],
+    chart: [75, 60, 42, 28, 16, 8, 3],
+  },
+  {
+    id: 2,
+    niche: "Интернет-магазин электроники",
+    domain: "techno-shop.ru",
+    period: "Февраль → Август 2024",
+    months: "6 мес",
+    trafficGrowth: "+420%",
+    topCount: 34,
+    queries: [
+      { kw: "купить iphone 15 pro москва",    was: 110, now: 4  },
+      { kw: "ноутбук для работы до 50000",    was: 87,  now: 3  },
+      { kw: "беспроводные наушники sony",     was: 63,  now: 2  },
+      { kw: "планшет для ребёнка 2024",       was: 95,  now: 5  },
+      { kw: "умная колонка яндекс цена",      was: 72,  now: 3  },
+      { kw: "купить телевизор самсунг 55",    was: 130, now: 7  },
+    ],
+    chart: [90, 72, 55, 38, 22, 12, 5],
+  },
 ];
 
 export default function Index() {
   const [form, setForm] = useState({ name: "", phone: "", site: "" });
   const [sent, setSent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeCase, setActiveCase] = useState(0);
 
-  // Топвизор — скриншоты позиций
-  type PositionReport = { id: number; title: string; date: string; img: string };
-  const [reports, setReports] = useState<PositionReport[]>([]);
-  const [reportTitle, setReportTitle] = useState("");
-  const [dragOver, setDragOver] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleReportFile = (file: File) => {
-    if (!file.type.startsWith("image/")) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = e.target?.result as string;
-      const title = reportTitle.trim() || file.name.replace(/\.[^.]+$/, "");
-      const date = new Date().toLocaleDateString("ru-RU", { day: "2-digit", month: "2-digit", year: "numeric" });
-      setReports((prev) => [{ id: Date.now(), title, date, img }, ...prev]);
-      setReportTitle("");
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setDragOver(false);
-    const file = e.dataTransfer.files[0];
-    if (file) handleReportFile(file);
-  };
-
-  const removeReport = (id: number) => setReports((prev) => prev.filter((r) => r.id !== id));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -409,149 +434,179 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ===== RESULTS ===== */}
-      <section id="Результаты" className="py-20 bg-[#f7f7f5]">
+      {/* ===== КЕЙСЫ — ПОЗИЦИИ ===== */}
+      <section id="Результаты" className="py-24 bg-[#0f0f0f]">
         <div className="max-w-7xl mx-auto px-5 md:px-10">
+
+          {/* Header */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: Y }}>
               <div className="h-px w-6" style={{ background: Y }} />
-              Кейсы
+              Топвизор — реальные данные
               <div className="h-px w-6" style={{ background: Y }} />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>РЕЗУЛЬТАТЫ КЛИЕНТОВ</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>РОСТ ПОЗИЦИЙ КЛИЕНТОВ</h2>
+            <p className="text-white/40 mt-2 text-sm">Данные из Топвизора. Реальные запросы, реальные позиции.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {RESULTS.map((r, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-black/8 hover:border-[#fec30a] transition-all hover:shadow-[0_4px_30px_rgba(254,195,10,0.1)]">
-                <div className="text-sm font-semibold text-[#0f0f0f] mb-4">{r.site}</div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex-1 text-center p-3 rounded-xl bg-black/4">
-                    <div className="text-xs text-black/40 mb-1">Было</div>
-                    <div className="font-bold text-sm text-black/60">{r.before}</div>
+          {/* Case tabs */}
+          <div className="flex flex-col sm:flex-row gap-3 mb-8">
+            {CASES.map((c, i) => (
+              <button
+                key={c.id}
+                onClick={() => setActiveCase(i)}
+                className="flex-1 text-left px-5 py-4 rounded-xl border transition-all duration-200"
+                style={activeCase === i
+                  ? { background: Y, borderColor: Y, color: B }
+                  : { background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)" }
+                }
+              >
+                <div className="font-bold text-sm" style={{ fontFamily: "'Oswald', sans-serif" }}>{c.niche}</div>
+                <div className="text-xs mt-0.5 opacity-60">{c.domain}</div>
+              </button>
+            ))}
+          </div>
+
+          {/* Active case */}
+          {CASES.map((c, i) => i !== activeCase ? null : (
+            <div key={c.id} className="grid lg:grid-cols-3 gap-6">
+
+              {/* LEFT — таблица позиций */}
+              <div className="lg:col-span-2 rounded-2xl overflow-hidden border border-white/8">
+                {/* Table header */}
+                <div className="px-5 py-4 flex items-center justify-between border-b border-white/8" style={{ background: "rgba(255,255,255,0.04)" }}>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full" style={{ background: Y }} />
+                    <span className="text-white text-sm font-semibold">Снятие позиций — {c.period}</span>
                   </div>
-                  <Icon name="ArrowRight" size={16} style={{ color: Y }} />
-                  <div className="flex-1 text-center p-3 rounded-xl" style={{ background: "rgba(254,195,10,0.1)", border: `1px solid rgba(254,195,10,0.3)` }}>
-                    <div className="text-xs text-black/40 mb-1">Стало</div>
-                    <div className="font-bold text-sm" style={{ color: B }}>{r.after}</div>
-                  </div>
+                  <span className="text-xs text-white/30 flex items-center gap-1">
+                    <Icon name="BarChart2" size={12} />
+                    Топвизор
+                  </span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-sm font-bold" style={{ color: Y }}>
-                    <Icon name="TrendingUp" size={14} />
-                    {r.growth}
+
+                {/* Column headers */}
+                <div className="grid grid-cols-12 px-5 py-2.5 border-b border-white/5 bg-white/[0.02]">
+                  <div className="col-span-6 text-xs text-white/30 uppercase tracking-wider">Поисковый запрос</div>
+                  <div className="col-span-2 text-xs text-white/30 uppercase tracking-wider text-center">Было</div>
+                  <div className="col-span-2 text-xs text-white/30 uppercase tracking-wider text-center">Стало</div>
+                  <div className="col-span-2 text-xs text-white/30 uppercase tracking-wider text-center">Рост</div>
+                </div>
+
+                {/* Rows */}
+                {c.queries.map((q, qi) => {
+                  const diff = q.was - q.now;
+                  const isTop = q.now <= 10;
+                  return (
+                    <div
+                      key={qi}
+                      className="grid grid-cols-12 px-5 py-3.5 border-b border-white/5 hover:bg-white/[0.03] transition-colors items-center"
+                    >
+                      <div className="col-span-6 text-sm text-white/75 truncate pr-4">{q.kw}</div>
+
+                      {/* WAS */}
+                      <div className="col-span-2 text-center">
+                        <span className="text-sm font-mono text-white/40 bg-white/5 px-2 py-0.5 rounded">{q.was}</span>
+                      </div>
+
+                      {/* NOW */}
+                      <div className="col-span-2 text-center">
+                        <span
+                          className="text-sm font-bold font-mono px-2 py-0.5 rounded"
+                          style={isTop
+                            ? { background: "rgba(254,195,10,0.15)", color: Y }
+                            : { background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.7)" }
+                          }
+                        >
+                          {q.now}
+                        </span>
+                      </div>
+
+                      {/* DIFF */}
+                      <div className="col-span-2 text-center flex items-center justify-center gap-1">
+                        <Icon name="ArrowUp" size={12} className="text-emerald-400" />
+                        <span className="text-sm font-bold text-emerald-400">+{diff}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Legend */}
+                <div className="px-5 py-3 flex items-center gap-4 bg-white/[0.02]">
+                  <div className="flex items-center gap-1.5 text-xs text-white/30">
+                    <div className="w-3 h-3 rounded-sm" style={{ background: "rgba(254,195,10,0.15)", border: `1px solid ${Y}` }} />
+                    ТОП-10
                   </div>
-                  <div className="text-xs text-black/35 flex items-center gap-1">
-                    <Icon name="Clock" size={11} />
-                    {r.months}
+                  <div className="flex items-center gap-1.5 text-xs text-white/30">
+                    <Icon name="ArrowUp" size={11} className="text-emerald-400" />
+                    Рост позиции
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ===== ТОПВИЗОР — ПОЗИЦИИ ===== */}
-      <section className="py-20 max-w-7xl mx-auto px-5 md:px-10">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: Y }}>
-            <div className="h-px w-6" style={{ background: Y }} />
-            Снятие позиций
-            <div className="h-px w-6" style={{ background: Y }} />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>ПОЗИЦИИ ИЗ ТОПВИЗОРА</h2>
-          <p className="text-black/45 mt-2 text-sm max-w-lg mx-auto">Загружайте скриншоты из Топвизора — они будут отображаться на сайте как доказательство роста позиций</p>
-        </div>
+              {/* RIGHT — stats */}
+              <div className="flex flex-col gap-4">
 
-        {/* Upload area */}
-        <div className="max-w-2xl mx-auto mb-10">
-          <div className="mb-3">
-            <input
-              type="text"
-              placeholder="Название отчёта (например: Юридические услуги — май 2024)"
-              value={reportTitle}
-              onChange={(e) => setReportTitle(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-black/12 text-sm outline-none transition-all bg-white"
-              onFocus={(e) => (e.target.style.borderColor = Y)}
-              onBlur={(e) => (e.target.style.borderColor = "rgba(0,0,0,0.12)")}
-            />
-          </div>
-
-          <div
-            className="relative rounded-2xl border-2 border-dashed transition-all cursor-pointer flex flex-col items-center justify-center py-10 px-6 text-center"
-            style={{
-              borderColor: dragOver ? Y : "rgba(0,0,0,0.15)",
-              background: dragOver ? "rgba(254,195,10,0.04)" : "#fafafa",
-            }}
-            onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-            onDragLeave={() => setDragOver(false)}
-            onDrop={handleDrop}
-            onClick={() => fileInputRef.current?.click()}
-          >
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => { const f = e.target.files?.[0]; if (f) handleReportFile(f); e.target.value = ""; }}
-            />
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-colors" style={{ background: dragOver ? Y : "rgba(254,195,10,0.1)" }}>
-              <Icon name="Upload" size={24} style={{ color: dragOver ? B : Y }} />
-            </div>
-            <div className="font-semibold text-sm text-[#0f0f0f] mb-1">
-              {dragOver ? "Отпустите файл" : "Перетащите скриншот или нажмите"}
-            </div>
-            <div className="text-xs text-black/40">PNG, JPG, WEBP — любой скриншот из Топвизора</div>
-          </div>
-        </div>
-
-        {/* Reports grid */}
-        {reports.length === 0 ? (
-          <div className="text-center py-12 rounded-2xl border border-dashed border-black/10 bg-[#fafafa]">
-            <Icon name="BarChart2" size={36} className="mx-auto mb-3 opacity-20" />
-            <div className="text-black/35 text-sm">Загруженные отчёты появятся здесь</div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {reports.map((r) => (
-              <div key={r.id} className="group relative rounded-2xl border border-black/8 overflow-hidden bg-white hover:border-[#fec30a] hover:shadow-[0_4px_30px_rgba(254,195,10,0.1)] transition-all">
-                {/* Image */}
-                <div className="relative aspect-video overflow-hidden bg-black/5">
-                  <img src={r.img} alt={r.title} className="w-full h-full object-cover" />
-                  {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                    <a href={r.img} target="_blank" rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
-                      style={{ background: Y }}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Icon name="Maximize2" size={16} style={{ color: B }} />
-                    </a>
-                    <button
-                      className="w-10 h-10 rounded-full flex items-center justify-center bg-white/15 hover:bg-red-500 transition-colors"
-                      onClick={() => removeReport(r.id)}
-                    >
-                      <Icon name="Trash2" size={16} className="text-white" />
-                    </button>
+                {/* Mini chart */}
+                <div className="rounded-2xl p-5 border border-white/8 bg-white/[0.03]">
+                  <div className="text-xs text-white/40 uppercase tracking-wider mb-4">Динамика средней позиции</div>
+                  <div className="flex items-end gap-1.5 h-24 mb-3">
+                    {c.chart.map((val, ci) => {
+                      const maxVal = Math.max(...c.chart);
+                      const heightPct = ((maxVal - val) / maxVal) * 100;
+                      const isLast = ci === c.chart.length - 1;
+                      return (
+                        <div key={ci} className="flex-1 flex flex-col items-center justify-end h-full gap-1">
+                          <div
+                            className="w-full rounded-t transition-all"
+                            style={{
+                              height: `${Math.max(8, heightPct)}%`,
+                              background: isLast ? Y : "rgba(254,195,10,0.25)",
+                            }}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="flex justify-between text-xs text-white/25">
+                    <span>Старт</span>
+                    <span style={{ color: Y }}>Сейчас</span>
                   </div>
                 </div>
 
-                {/* Info */}
-                <div className="p-4">
-                  <div className="font-semibold text-sm text-[#0f0f0f] mb-1 leading-tight">{r.title}</div>
-                  <div className="flex items-center gap-1.5 text-xs text-black/40">
-                    <Icon name="Calendar" size={11} />
-                    Добавлено {r.date}
+                {/* KPIs */}
+                <div className="rounded-2xl p-5 border border-white/8 bg-white/[0.03] space-y-4">
+                  <div className="flex justify-between items-center">
+                    <div className="text-xs text-white/40">Рост трафика</div>
+                    <div className="text-xl font-bold" style={{ color: Y, fontFamily: "'Oswald', sans-serif" }}>{c.trafficGrowth}</div>
+                  </div>
+                  <div className="h-px bg-white/5" />
+                  <div className="flex justify-between items-center">
+                    <div className="text-xs text-white/40">Запросов в ТОП-10</div>
+                    <div className="text-xl font-bold text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>{c.topCount}</div>
+                  </div>
+                  <div className="h-px bg-white/5" />
+                  <div className="flex justify-between items-center">
+                    <div className="text-xs text-white/40">Срок работы</div>
+                    <div className="text-xl font-bold text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>{c.months}</div>
+                  </div>
+                  <div className="h-px bg-white/5" />
+                  <div className="flex justify-between items-center">
+                    <div className="text-xs text-white/40">Период</div>
+                    <div className="text-xs text-white/60">{c.period}</div>
                   </div>
                 </div>
 
-                {/* Yellow accent bar */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: Y }} />
+                <button
+                  className="w-full py-3.5 rounded-xl font-bold text-sm transition-all hover:opacity-90"
+                  style={{ background: Y, color: B }}
+                >
+                  Хочу такие же результаты
+                </button>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* ===== WHY US ===== */}
