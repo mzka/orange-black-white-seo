@@ -1,67 +1,1120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Поехали!</title>
-    <meta name="description" content="Poehali.dev — запусти свой сайт за минуту!"/>
-    <meta name="author" content="poehali.dev"/>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta property="og:title" content="Поехали!">
-    <meta property="og:description" content="Ваш личный программист, который делает сайты в 30 раз быстрее обычного.">
-    <meta property="og:image:width" content="4800">
-    <meta property="og:image:height" content="2520">
-    <meta property="og:image:alt" content="Поехали! — сервис разработки сайтов с помощью ИИ">
-    <meta property="og:image" content="https://cdn.poehali.dev/intertnal/img/og.png">
-    <meta name="twitter:image" content="https://cdn.poehali.dev/intertnal/img/og.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>СЕО Ракета — Автоматическое SEO-продвижение в Яндексе</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;900&family=Oswald:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS COMMENT! -->
+    :root {
+      --y: #fec30a;
+      --b: #0f0f0f;
+      --gray: #f7f7f5;
+      --border: rgba(0,0,0,0.08);
+    }
 
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS COMMENT! -->
-    <script src="https://cdn.poehali.dev/intertnal/js/pp-min-2.js"></script>
-    <script src="https://cdn.poehali.dev/intertnal/js/route-min.js"></script>
-    <script src="https://cdn.poehali.dev/intertnal/js/telemetry-min.js"></script>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS COMMENT! -->
+    body {
+      font-family: 'Golos Text', sans-serif;
+      color: var(--b);
+      background: #fff;
+      min-height: 100vh;
+    }
 
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+    @media(max-width:768px) { .container { padding: 0 20px; } }
+
+    /* ===== NAV ===== */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .logo-img {
+      width: 36px; height: 36px; border-radius: 8px; overflow: hidden;
+      border: 2px solid var(--y); flex-shrink: 0;
+    }
+    .logo-img img { width: 100%; height: 100%; object-fit: cover; }
+    .logo-text {
+      font-family: 'Oswald', sans-serif; font-weight: 700;
+      font-size: 16px; letter-spacing: 0.05em;
+    }
+    .logo-text span { color: var(--y); }
+
+    nav { display: flex; gap: 28px; }
+    nav a { font-size: 14px; color: rgba(0,0,0,0.55); transition: color .2s; }
+    nav a:hover { color: var(--b); }
+
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .btn-login { font-size: 14px; font-weight: 500; color: rgba(0,0,0,0.6); transition: color .2s; }
+    .btn-login:hover { color: var(--b); }
+
+    .btn-primary {
+      font-size: 14px; font-weight: 700;
+      padding: 8px 16px; border-radius: 8px;
+      background: var(--y); color: var(--b);
+      transition: opacity .2s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+
+    .burger { display: none; background: none; border: none; cursor: pointer; }
+
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 16px;
+      border-top: 1px solid var(--border);
+      background: #fff; padding: 16px 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 14px; color: rgba(0,0,0,0.7); }
+    .mobile-menu .btn-primary { text-align: center; display: block; padding: 10px; border-radius: 8px; }
+
+    @media(max-width:768px) {
+      nav, .btn-login { display: none; }
+      .burger { display: block; }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 128px 0 80px;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    @media(max-width:768px) { .hero-grid { grid-template-columns: 1fr; } }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--y); border: 1px solid rgba(254,195,10,0.3); background: rgba(254,195,10,0.06);
+      padding: 6px 12px; border-radius: 999px; margin-bottom: 20px;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--y);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    h1 {
+      font-family: 'Oswald', sans-serif; font-weight: 900;
+      font-size: clamp(36px,5vw,60px); line-height: 1.1; margin-bottom: 20px;
+    }
+    h1 span { color: var(--y); }
+
+    .hero-desc { color: rgba(0,0,0,0.55); font-size: 18px; line-height: 1.6; margin-bottom: 32px; max-width: 480px; }
+
+    .hero-btns { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .btn-secondary {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; padding: 14px 24px; border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.12); transition: border-color .2s;
+    }
+    .btn-secondary:hover { border-color: rgba(0,0,0,0.25); }
+
+    .btn-hero {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 700; padding: 14px 24px; border-radius: 12px;
+      background: var(--y); color: var(--b); transition: opacity .2s;
+    }
+    .btn-hero:hover { opacity: 0.88; }
+
+    .hero-gift {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 12px 16px; border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.08); background: var(--gray);
+    }
+    .hero-gift-icon {
+      width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(254,195,10,0.15);
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+    }
+    .hero-gift-text { font-size: 12px; color: rgba(0,0,0,0.55); line-height: 1.4; }
+    .hero-gift-text strong { color: var(--b); }
+
+    .hero-image-wrap { position: relative; }
+    .hero-image-wrap img { border-radius: 16px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
+
+    .hero-badge-float {
+      position: absolute; bottom: -16px; left: -16px;
+      background: #fff; border-radius: 16px; padding: 12px 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12); border: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .float-icon {
+      width: 36px; height: 36px; border-radius: 12px; flex-shrink: 0;
+      background: rgba(16,185,129,0.1);
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .float-label { font-size: 11px; color: rgba(0,0,0,0.4); }
+    .float-value { font-weight: 700; font-size: 14px; color: #059669; }
+
+    /* ===== STATS ===== */
+    .stats {
+      padding: 48px 0;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      background: var(--gray);
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0;
+    }
+    @media(max-width:768px) { .stats-grid { grid-template-columns: repeat(2,1fr); gap: 24px; } }
+
+    .stat-item { text-align: center; padding: 0 32px; border-right: 1px solid rgba(0,0,0,0.08); }
+    .stat-item:last-child { border-right: none; }
+    @media(max-width:768px) { .stat-item { border-right: none; } }
+
+    .stat-value {
+      font-family: 'Oswald', sans-serif; font-weight: 900;
+      font-size: clamp(28px,4vw,40px); color: var(--b); margin-bottom: 4px;
+    }
+    .stat-label { font-size: 11px; color: rgba(0,0,0,0.45); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ===== MARQUEE ===== */
+    .marquee-wrap {
+      padding: 16px 0;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      background: var(--y);
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    .marquee-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 0 24px;
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--b); white-space: nowrap;
+    }
+    .marquee-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.4); flex-shrink: 0; }
+
+    /* ===== SECTION HEADER ===== */
+    .section-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--y); margin-bottom: 12px;
+    }
+    .section-badge .line { height: 1px; width: 24px; background: var(--y); }
+
+    h2 {
+      font-family: 'Oswald', sans-serif; font-weight: 700;
+      font-size: clamp(28px,4vw,40px);
+    }
+
+    .section-sub { color: rgba(0,0,0,0.45); font-size: 14px; margin-top: 8px; }
+
+    /* ===== HOW ===== */
+    .how { padding: 96px 0; }
+    .how-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+    @media(max-width:768px) { .how-grid { grid-template-columns: 1fr; } }
+
+    .how-item { text-align: center; position: relative; }
+    .how-icon-wrap {
+      position: relative; display: inline-flex; flex-direction: column; align-items: center;
+      margin-bottom: 20px;
+    }
+    .how-icon {
+      width: 80px; height: 80px; border-radius: 16px;
+      background: rgba(254,195,10,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; position: relative;
+    }
+    .how-num {
+      position: absolute; top: -8px; right: -8px;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--y); color: var(--b);
+      font-family: 'Oswald', sans-serif; font-weight: 900; font-size: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .how-item h3 {
+      font-family: 'Oswald', sans-serif; font-weight: 700;
+      font-size: 18px; margin-bottom: 8px;
+    }
+    .how-item p { color: rgba(0,0,0,0.5); font-size: 14px; line-height: 1.6; max-width: 280px; margin: 0 auto; }
+
+    /* ===== FEATURES ===== */
+    .features { padding: 96px 0; background: var(--b); }
+    .features h2 { color: #fff; }
+    .features .section-sub { color: rgba(255,255,255,0.4); }
+
+    .features-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    @media(max-width:1024px) { .features-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:640px) { .features-grid { grid-template-columns: 1fr; } }
+
+    .feature-card {
+      border-radius: 16px; padding: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      transition: border-color .2s;
+    }
+    .feature-card:hover { border-color: rgba(255,255,255,0.2); }
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(254,195,10,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 16px;
+    }
+    .feature-card h3 { color: #fff; font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+    .feature-card p { color: rgba(255,255,255,0.4); font-size: 14px; line-height: 1.6; }
+
+    /* ===== VS TABLE ===== */
+    .vs { padding: 96px 0; }
+    .vs-table { border-radius: 16px; border: 1px solid var(--border); overflow: hidden; }
+    .vs-head {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      background: var(--gray); border-bottom: 1px solid var(--border);
+    }
+    .vs-head-cell {
+      padding: 16px 24px;
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; color: rgba(0,0,0,0.4);
+    }
+    .vs-head-cell:not(:first-child) { border-left: 1px solid var(--border); text-align: center; }
+    .vs-head-cell.us { color: var(--y); font-family: 'Oswald', sans-serif; }
+
+    .vs-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .vs-row:nth-child(even) { background: #fafafa; }
+    .vs-row:nth-child(odd) { background: #fff; }
+    .vs-row:last-child { border-bottom: none; }
+
+    .vs-cell { padding: 16px 24px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+    .vs-cell:first-child { font-weight: 500; color: rgba(0,0,0,0.7); }
+    .vs-cell:not(:first-child) { border-left: 1px solid rgba(0,0,0,0.05); justify-content: center; }
+    .vs-cell.bad { color: rgba(0,0,0,0.4); }
+    .vs-cell.good { font-weight: 600; color: #16a34a; }
+    .icon-x { color: #f87171; font-size: 12px; }
+    .icon-check { color: #16a34a; font-size: 12px; }
+
+    .vs-cta { margin-top: 32px; text-align: center; }
+
+    /* ===== CASES ===== */
+    .cases { padding: 96px 0; background: var(--gray); }
+    .cases-tabs { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+    .case-tab {
+      flex: 1; min-width: 160px; text-align: left;
+      padding: 16px 20px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);
+      background: #fff; color: rgba(0,0,0,0.45); cursor: pointer; transition: all .2s;
+    }
+    .case-tab.active { background: var(--b); border-color: var(--b); color: #fff; }
+    .case-tab-title { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 14px; }
+    .case-tab-domain { font-size: 12px; opacity: 0.5; margin-top: 2px; }
+
+    .case-panel { display: none; }
+    .case-panel.active { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+    @media(max-width:768px) { .case-panel.active { grid-template-columns: 1fr; } }
+
+    .positions-table {
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border); background: #fff;
+    }
+    .positions-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.015);
+    }
+    .positions-head-left { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
+    .pos-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--y); }
+    .positions-head-right { font-size: 12px; color: rgba(0,0,0,0.3); }
+
+    .positions-cols {
+      display: grid; grid-template-columns: 6fr 2fr 2fr 2fr;
+      padding: 10px 20px; border-bottom: 1px solid rgba(0,0,0,0.05);
+      background: rgba(0,0,0,0.01);
+    }
+    .col-label { font-size: 11px; color: rgba(0,0,0,0.35); text-transform: uppercase; letter-spacing: 0.06em; }
+    .col-label:not(:first-child) { text-align: center; }
+
+    .positions-row {
+      display: grid; grid-template-columns: 6fr 2fr 2fr 2fr;
+      padding: 14px 20px; border-bottom: 1px solid rgba(0,0,0,0.05);
+      align-items: center; transition: background .15s;
+    }
+    .positions-row:hover { background: rgba(0,0,0,0.012); }
+    .positions-row:last-child { border-bottom: none; }
+
+    .kw-text { font-size: 13px; color: rgba(0,0,0,0.75); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-right: 16px; }
+    .pos-badge {
+      font-size: 13px; font-weight: 700; font-family: monospace;
+      padding: 2px 8px; border-radius: 6px; text-align: center; display: inline-block; margin: 0 auto;
+    }
+    .pos-was { background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.35); }
+    .pos-now-top { background: rgba(254,195,10,0.15); color: #b8870a; }
+    .pos-now-ok { background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.6); }
+    .pos-growth { color: #059669; font-weight: 700; font-size: 13px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px; }
+
+    .positions-footer {
+      display: flex; gap: 16px; padding: 12px 20px;
+      background: rgba(0,0,0,0.01); font-size: 12px; color: rgba(0,0,0,0.35);
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 3px; background: rgba(254,195,10,0.2); border: 1px solid rgba(254,195,10,0.5); }
+
+    .case-side { display: flex; flex-direction: column; gap: 16px; }
+    .chart-card { border-radius: 16px; padding: 20px; border: 1px solid var(--border); background: #fff; }
+    .chart-label { font-size: 11px; color: rgba(0,0,0,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+    .chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 96px; margin-bottom: 12px; }
+    .chart-bar-wrap { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+    .chart-bar { width: 100%; border-radius: 4px 4px 0 0; transition: all .3s; }
+    .chart-axis { display: flex; justify-content: space-between; font-size: 11px; color: rgba(0,0,0,0.3); }
+
+    .metrics-card { border-radius: 16px; padding: 20px; border: 1px solid var(--border); background: #fff; }
+    .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 0 0 16px; }
+    .metric-row + .metric-row { padding: 16px 0 0; border-top: 1px solid rgba(0,0,0,0.05); }
+    .metric-name { font-size: 12px; color: rgba(0,0,0,0.4); }
+    .metric-val { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 22px; }
+    .metric-val.green { color: #059669; }
+
+    .case-cta {
+      width: 100%; padding: 14px; border-radius: 12px;
+      font-weight: 700; font-size: 14px; background: var(--y); color: var(--b);
+      transition: opacity .2s;
+    }
+    .case-cta:hover { opacity: 0.88; }
+
+    /* ===== TARIFFS ===== */
+    .tariffs { padding: 96px 0; }
+    .tariffs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    @media(max-width:768px) { .tariffs-grid { grid-template-columns: 1fr; } }
+
+    .tariff-card {
+      border-radius: 16px; padding: 28px;
+      border: 1px solid var(--border); background: #fff;
+      transition: all .2s;
+    }
+    .tariff-card.highlight { background: var(--b); border-color: var(--b); color: #fff; }
+
+    .tariff-popular {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      padding: 4px 12px; border-radius: 999px; margin-bottom: 16px;
+      background: var(--y); color: var(--b);
+    }
+    .tariff-desc { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: rgba(0,0,0,0.45); }
+    .tariff-card.highlight .tariff-desc { color: rgba(255,255,255,0.6); }
+    .tariff-name { font-family: 'Oswald', sans-serif; font-weight: 900; font-size: 24px; margin-bottom: 4px; }
+    .tariff-price { display: flex; align-items: flex-end; gap: 4px; margin-bottom: 24px; }
+    .tariff-amount { font-family: 'Oswald', sans-serif; font-weight: 900; font-size: 40px; }
+    .tariff-card:not(.highlight) .tariff-amount { color: var(--b); }
+    .tariff-card.highlight .tariff-amount { color: var(--y); }
+    .tariff-period { font-size: 14px; margin-bottom: 6px; color: rgba(0,0,0,0.35); }
+    .tariff-card.highlight .tariff-period { color: rgba(255,255,255,0.4); }
+
+    .tariff-features { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 12px; }
+    .tariff-feat { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+    .feat-check {
+      width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+    }
+    .tariff-card:not(.highlight) .feat-check { background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.5); }
+    .tariff-card.highlight .feat-check { background: rgba(254,195,10,0.2); color: var(--y); }
+    .tariff-card:not(.highlight) .tariff-feat-text { color: rgba(0,0,0,0.65); }
+    .tariff-card.highlight .tariff-feat-text { color: rgba(255,255,255,0.75); }
+
+    .tariff-btn {
+      width: 100%; padding: 12px; border-radius: 12px;
+      font-weight: 700; font-size: 14px; transition: opacity .2s;
+    }
+    .tariff-btn:hover { opacity: 0.88; }
+    .tariff-card:not(.highlight) .tariff-btn { background: rgba(0,0,0,0.06); color: var(--b); }
+    .tariff-card.highlight .tariff-btn { background: var(--y); color: var(--b); }
+
+    /* ===== FAQ ===== */
+    .faq { padding: 96px 0; background: var(--gray); }
+    .faq-inner { max-width: 768px; margin: 0 auto; }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-item { border-radius: 16px; border: 1px solid var(--border); background: #fff; overflow: hidden; }
+    .faq-q {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 20px 24px; text-align: left; cursor: pointer;
+      background: none; font-family: inherit; font-size: 14px; font-weight: 600;
+      transition: background .15s;
+    }
+    .faq-q:hover { background: rgba(0,0,0,0.01); }
+    .faq-icon {
+      width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(0,0,0,0.06); color: rgba(0,0,0,0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 400; transition: all .2s;
+    }
+    .faq-item.open .faq-icon { background: var(--y); color: var(--b); }
+    .faq-icon-sym::before { content: '+'; }
+    .faq-item.open .faq-icon-sym::before { content: '−'; }
+
+    .faq-a { display: none; padding: 0 24px 20px; }
+    .faq-a-inner { border-top: 1px solid rgba(0,0,0,0.05); padding-top: 16px; font-size: 14px; color: rgba(0,0,0,0.55); line-height: 1.7; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ===== CTA ===== */
+    .cta { padding: 96px 0; background: var(--b); }
+    .cta-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+    .cta-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--y); border: 1px solid rgba(254,195,10,0.25); background: rgba(254,195,10,0.06);
+      padding: 6px 12px; border-radius: 999px; margin-bottom: 20px;
+    }
+    .cta h2 { color: #fff; margin-bottom: 16px; }
+    .cta h2 span { color: var(--y); }
+    .cta-desc { color: rgba(255,255,255,0.45); font-size: 14px; margin-bottom: 40px; }
+
+    .cta-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto 20px; }
+    @media(max-width:640px) { .cta-form { flex-direction: column; } }
+    .cta-input {
+      flex: 1; padding: 14px 16px; border-radius: 12px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; font-size: 14px; font-family: inherit; outline: none;
+      transition: border-color .2s;
+    }
+    .cta-input::placeholder { color: rgba(255,255,255,0.3); }
+    .cta-input:focus { border-color: rgba(255,255,255,0.3); }
+    .cta-submit {
+      padding: 14px 24px; border-radius: 12px;
+      font-weight: 700; font-size: 14px; white-space: nowrap;
+      background: var(--y); color: var(--b);
+      transition: opacity .2s; font-family: inherit;
+    }
+    .cta-submit:hover { opacity: 0.88; }
+
+    .cta-success { display: none; color: #34d399; font-weight: 600; font-size: 16px; margin-bottom: 20px; }
+    .cta-success.show { display: block; }
+    .cta-form.hidden { display: none; }
+
+    .cta-perks { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; font-size: 12px; color: rgba(255,255,255,0.25); }
+    .cta-perk { display: flex; align-items: center; gap: 4px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .footer-copy { font-size: 12px; color: rgba(0,0,0,0.35); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: rgba(0,0,0,0.4); transition: color .2s; }
+    .footer-links a:hover { color: var(--b); }
+
+    /* ===== TEXT CENTER ===== */
+    .text-center { text-align: center; }
+    .mb-16 { margin-bottom: 64px; }
+    .mb-14 { margin-bottom: 56px; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+  </style>
     <meta name="pp-name" value="orange-black-white-seo">
+      <script src="https://cdn.poehali.dev/intertnal/js/pp-min-2.js"></script>
+      <script src="https://cdn.poehali.dev/intertnal/js/route-min.js"></script>
       <script src="https://cdn.poehali.dev/intertnal/js/inspector-min.js"></script>
+      <script src="https://cdn.poehali.dev/intertnal/js/telemetry-min.js"></script>
   </head>
-
 <body>
-<div id="root"></div>
-<script type="module" src="/src/main.tsx"></script>
 
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function (m, e, t, r, i, k, a) {
-        m[i] = m[i] || function () {
-            (m[i].a = m[i].a || []).push(arguments)
-        };
-        m[i].l = 1 * new Date();
-        for (var j = 0; j < document.scripts.length; j++) {
-            if (document.scripts[j].src === r) {
-                return;
-            }
-        }
-        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-    })
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-img">
+        <img src="https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7db5da15f7/files/c452687c-8fc1-4883-9cf1-d825aa7e8bd8.jpg" alt="СЕО Ракета" />
+      </div>
+      <span class="logo-text">СЕО<span> РАКЕТА</span></span>
+    </a>
 
-    ym(101026698, "init", {
-        trustedDomains: ["poehali.dev"],
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true,
-        webvisor: true,
-        trackHash: true
+    <nav>
+      <a href="#how">Как работает</a>
+      <a href="#results">Результаты</a>
+      <a href="#tariffs">Тарифы</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="nav-right">
+      <button class="btn-login">Войти</button>
+      <button class="btn-primary">7 дней бесплатно</button>
+      <button class="burger" onclick="toggleMenu()" aria-label="Меню">
+        <svg id="burger-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="6" x2="20" y2="6"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#how" onclick="closeMenu()">Как работает</a>
+    <a href="#results" onclick="closeMenu()">Результаты</a>
+    <a href="#tariffs" onclick="closeMenu()">Тарифы</a>
+    <a href="#faq" onclick="closeMenu()">FAQ</a>
+    <button class="btn-primary" style="border-radius:8px;padding:10px;font-family:inherit;">7 дней бесплатно</button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <div class="dot"></div>
+          Автоматическое SEO-продвижение
+        </div>
+        <h1>ВЫВЕДИ САЙТ<br>В ТОП ЯНДЕКСА<br><span>БЕЗ УСИЛИЙ</span></h1>
+        <p class="hero-desc">Подключаете сайт — сервис сам продвигает его в поиске. Никаких SEO-специалистов, подрядчиков и ручной работы.</p>
+        <div class="hero-btns">
+          <button class="btn-hero">🚀 Начать — 7 дней бесплатно</button>
+          <button class="btn-secondary">▶ Смотреть демо</button>
+        </div>
+        <div class="hero-gift">
+          <div class="hero-gift-icon">🎁</div>
+          <div class="hero-gift-text"><strong>7 дней продвижения бесплатно</strong> — без карты, отмена в любой момент</div>
+        </div>
+      </div>
+
+      <div class="hero-image-wrap">
+        <img src="https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7db5da15f7/files/adc27d5b-3383-4ce1-9ad1-b1fbb9b82616.jpg" alt="Личный кабинет" />
+        <div class="hero-badge-float">
+          <div class="float-icon">📈</div>
+          <div>
+            <div class="float-label">Рост позиций за месяц</div>
+            <div class="float-value">+47 запросов в ТОП-10</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-value">430+</div><div class="stat-label">сайтов уже в ТОП</div></div>
+      <div class="stat-item"><div class="stat-value">7 дней</div><div class="stat-label">до первых результатов</div></div>
+      <div class="stat-item"><div class="stat-value">4–7 дн</div><div class="stat-label">съём позиций</div></div>
+      <div class="stat-item"><div class="stat-value">0 ч.</div><div class="stat-label">ручной работы с вас</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- ===== КАК РАБОТАЕТ ===== -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="text-center mb-16">
+      <div class="section-badge"><div class="line"></div>Просто как раз-два-три<div class="line"></div></div>
+      <h2>КАК ЭТО РАБОТАЕТ</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-item">
+        <div class="how-icon-wrap">
+          <div class="how-icon">🌐<div class="how-num">1</div></div>
+        </div>
+        <h3>Подключаете сайт</h3>
+        <p>Вводите адрес сайта, выбираете тематику и регион. Никакого доступа к коду — только URL.</p>
+      </div>
+      <div class="how-item">
+        <div class="how-icon-wrap">
+          <div class="how-icon">⚙️<div class="how-num">2</div></div>
+        </div>
+        <h3>Сервис всё делает сам</h3>
+        <p>Алгоритм анализирует конкурентов, оптимизирует страницы и работает с факторами ранжирования Яндекса.</p>
+      </div>
+      <div class="how-item">
+        <div class="how-icon-wrap">
+          <div class="how-icon">📊<div class="how-num">3</div></div>
+        </div>
+        <h3>Наблюдаете за ростом</h3>
+        <p>В личном кабинете видите позиции по каждому запросу. Съём каждые 4–7 дней — график идёт вверх.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features">
+  <div class="container">
+    <div class="text-center mb-16">
+      <h2>ЧТО ДЕЛАЕТ СЕРВИС</h2>
+      <p class="section-sub">Всё включено. Вы только наблюдаете.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Полностью автоматически</h3>
+        <p>Никаких SEO-специалистов, подрядчиков и ручной работы. Сервис делает всё сам 24/7.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Съём позиций каждые 4–7 дней</h3>
+        <p>Личный кабинет показывает актуальные позиции по каждому запросу. Данные обновляются каждые 4–7 дней.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Только белые методы</h3>
+        <p>Работаем строго по требованиям Яндекса. Никаких рисков санкций и фильтров.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👁️</div>
+        <h3>Прозрачная аналитика</h3>
+        <p>Видите каждое действие системы: что сделано, какой результат, какая позиция сейчас.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VS ===== -->
+<section class="vs">
+  <div class="container">
+    <div class="text-center mb-14">
+      <div class="section-badge"><div class="line"></div>Сравнение<div class="line"></div></div>
+      <h2>МЫ VS SEO-СПЕЦИАЛИСТ</h2>
+      <p class="section-sub">Почему сервис выгоднее найма подрядчика</p>
+    </div>
+    <div class="vs-table">
+      <div class="vs-head">
+        <div class="vs-head-cell">Параметр</div>
+        <div class="vs-head-cell">SEO-специалист</div>
+        <div class="vs-head-cell us">СЕО РАКЕТА</div>
+      </div>
+      <div class="vs-row">
+        <div class="vs-cell">Стоимость в месяц</div>
+        <div class="vs-cell bad"><span class="icon-x">✕</span> от 30 000 ₽</div>
+        <div class="vs-cell good"><span class="icon-check">✓</span> от 2 900 ₽</div>
+      </div>
+      <div class="vs-row">
+        <div class="vs-cell">Время запуска</div>
+        <div class="vs-cell bad"><span class="icon-x">✕</span> 2–4 недели</div>
+        <div class="vs-cell good"><span class="icon-check">✓</span> 5 минут</div>
+      </div>
+      <div class="vs-row">
+        <div class="vs-cell">Прозрачность</div>
+        <div class="vs-cell bad"><span class="icon-x">✕</span> Отчёт раз в месяц</div>
+        <div class="vs-cell good"><span class="icon-check">✓</span> Данные в реальном времени</div>
+      </div>
+      <div class="vs-row">
+        <div class="vs-cell">Зависимость</div>
+        <div class="vs-cell bad"><span class="icon-x">✕</span> Один человек = риск</div>
+        <div class="vs-cell good"><span class="icon-check">✓</span> Сервис работает 24/7</div>
+      </div>
+      <div class="vs-row">
+        <div class="vs-cell">Первые результаты</div>
+        <div class="vs-cell bad"><span class="icon-x">✕</span> 3–6 месяцев</div>
+        <div class="vs-cell good"><span class="icon-check">✓</span> От 7 дней</div>
+      </div>
+      <div class="vs-row">
+        <div class="vs-cell">Управление</div>
+        <div class="vs-cell bad"><span class="icon-x">✕</span> Звонки, согласования</div>
+        <div class="vs-cell good"><span class="icon-check">✓</span> Личный кабинет</div>
+      </div>
+    </div>
+    <div class="vs-cta">
+      <button class="btn-primary" style="padding:14px 32px;border-radius:12px;font-size:14px;">Попробовать 7 дней бесплатно</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== КЕЙСЫ ===== -->
+<section class="cases" id="results">
+  <div class="container">
+    <div class="text-center mb-14">
+      <div class="section-badge"><div class="line"></div>Топвизор — реальные данные<div class="line"></div></div>
+      <h2>РОСТ ПОЗИЦИЙ КЛИЕНТОВ</h2>
+      <p class="section-sub">Реальные запросы, реальные позиции. Данные из Топвизора.</p>
+    </div>
+
+    <div class="cases-tabs">
+      <button class="case-tab active" onclick="switchCase(0, this)">
+        <div class="case-tab-title">Юридические услуги</div>
+        <div class="case-tab-domain">pravo-consult.ru</div>
+      </button>
+      <button class="case-tab" onclick="switchCase(1, this)">
+        <div class="case-tab-title">Стоматология</div>
+        <div class="case-tab-domain">smile-clinic.ru</div>
+      </button>
+      <button class="case-tab" onclick="switchCase(2, this)">
+        <div class="case-tab-title">Интернет-магазин</div>
+        <div class="case-tab-domain">techno-shop.ru</div>
+      </button>
+    </div>
+
+    <!-- Кейс 0 -->
+    <div class="case-panel active" id="case-0">
+      <div class="positions-table">
+        <div class="positions-head">
+          <div class="positions-head-left"><div class="pos-dot"></div>Снятие позиций — Март → Август 2024</div>
+          <div class="positions-head-right">📊 Топвизор</div>
+        </div>
+        <div class="positions-cols">
+          <div class="col-label">Поисковый запрос</div>
+          <div class="col-label" style="text-align:center">Было</div>
+          <div class="col-label" style="text-align:center">Стало</div>
+          <div class="col-label" style="text-align:center">Рост</div>
+        </div>
+        <div class="positions-row"><div class="kw-text">юрист по недвижимости москва</div><div style="text-align:center"><span class="pos-badge pos-was">54</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">3</span></div><div class="pos-growth">▲ +51</div></div>
+        <div class="positions-row"><div class="kw-text">составить договор купли продажи</div><div style="text-align:center"><span class="pos-badge pos-was">89</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">5</span></div><div class="pos-growth">▲ +84</div></div>
+        <div class="positions-row"><div class="kw-text">юридическая консультация онлайн</div><div style="text-align:center"><span class="pos-badge pos-was">43</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">2</span></div><div class="pos-growth">▲ +41</div></div>
+        <div class="positions-row"><div class="kw-text">раздел имущества при разводе</div><div style="text-align:center"><span class="pos-badge pos-was">120</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">7</span></div><div class="pos-growth">▲ +113</div></div>
+        <div class="positions-row"><div class="kw-text">арбитражный юрист цена</div><div style="text-align:center"><span class="pos-badge pos-was">67</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">4</span></div><div class="pos-growth">▲ +63</div></div>
+        <div class="positions-row"><div class="kw-text">услуги адвоката по уголовным</div><div style="text-align:center"><span class="pos-badge pos-was">95</span></div><div style="text-align:center"><span class="pos-badge pos-now-ok">9</span></div><div class="pos-growth">▲ +86</div></div>
+        <div class="positions-footer">
+          <div class="legend-item"><div class="legend-dot"></div>ТОП-10</div>
+          <div class="legend-item">▲ Рост позиции</div>
+        </div>
+      </div>
+      <div class="case-side">
+        <div class="chart-card">
+          <div class="chart-label">Динамика средней позиции</div>
+          <div class="chart-bars">
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:8%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:19%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:35%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:53%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:74%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:87%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:100%;background:#fec30a"></div></div>
+          </div>
+          <div class="chart-axis"><span>Старт</span><span>Сейчас</span></div>
+        </div>
+        <div class="metrics-card">
+          <div class="metric-row"><div class="metric-name">Рост трафика</div><div class="metric-val green">+218%</div></div>
+          <div class="metric-row"><div class="metric-name">Запросов в ТОП-10</div><div class="metric-val">12</div></div>
+          <div class="metric-row"><div class="metric-name">Срок</div><div class="metric-val">5 мес</div></div>
+        </div>
+        <button class="case-cta">Попробовать 7 дней бесплатно</button>
+      </div>
+    </div>
+
+    <!-- Кейс 1 -->
+    <div class="case-panel" id="case-1">
+      <div class="positions-table">
+        <div class="positions-head">
+          <div class="positions-head-left"><div class="pos-dot"></div>Снятие позиций — Январь → Май 2024</div>
+          <div class="positions-head-right">📊 Топвизор</div>
+        </div>
+        <div class="positions-cols">
+          <div class="col-label">Поисковый запрос</div>
+          <div class="col-label" style="text-align:center">Было</div>
+          <div class="col-label" style="text-align:center">Стало</div>
+          <div class="col-label" style="text-align:center">Рост</div>
+        </div>
+        <div class="positions-row"><div class="kw-text">имплантация зубов под ключ</div><div style="text-align:center"><span class="pos-badge pos-was">78</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">3</span></div><div class="pos-growth">▲ +75</div></div>
+        <div class="positions-row"><div class="kw-text">виниры цена москва</div><div style="text-align:center"><span class="pos-badge pos-was">102</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">6</span></div><div class="pos-growth">▲ +96</div></div>
+        <div class="positions-row"><div class="kw-text">лечение зубов без боли</div><div style="text-align:center"><span class="pos-badge pos-was">56</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">2</span></div><div class="pos-growth">▲ +54</div></div>
+        <div class="positions-row"><div class="kw-text">брекеты взрослым стоимость</div><div style="text-align:center"><span class="pos-badge pos-was">88</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">5</span></div><div class="pos-growth">▲ +83</div></div>
+        <div class="positions-row"><div class="kw-text">удаление зуба мудрости цена</div><div style="text-align:center"><span class="pos-badge pos-was">34</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">1</span></div><div class="pos-growth">▲ +33</div></div>
+        <div class="positions-row"><div class="kw-text">протезирование зубов москва</div><div style="text-align:center"><span class="pos-badge pos-was">145</span></div><div style="text-align:center"><span class="pos-badge pos-now-ok">8</span></div><div class="pos-growth">▲ +137</div></div>
+        <div class="positions-footer">
+          <div class="legend-item"><div class="legend-dot"></div>ТОП-10</div>
+          <div class="legend-item">▲ Рост позиции</div>
+        </div>
+      </div>
+      <div class="case-side">
+        <div class="chart-card">
+          <div class="chart-label">Динамика средней позиции</div>
+          <div class="chart-bars">
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:8%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:21%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:44%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:63%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:79%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:89%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:100%;background:#fec30a"></div></div>
+          </div>
+          <div class="chart-axis"><span>Старт</span><span>Сейчас</span></div>
+        </div>
+        <div class="metrics-card">
+          <div class="metric-row"><div class="metric-name">Рост трафика</div><div class="metric-val green">+310%</div></div>
+          <div class="metric-row"><div class="metric-name">Запросов в ТОП-10</div><div class="metric-val">18</div></div>
+          <div class="metric-row"><div class="metric-name">Срок</div><div class="metric-val">4 мес</div></div>
+        </div>
+        <button class="case-cta">Попробовать 7 дней бесплатно</button>
+      </div>
+    </div>
+
+    <!-- Кейс 2 -->
+    <div class="case-panel" id="case-2">
+      <div class="positions-table">
+        <div class="positions-head">
+          <div class="positions-head-left"><div class="pos-dot"></div>Снятие позиций — Февраль → Август 2024</div>
+          <div class="positions-head-right">📊 Топвизор</div>
+        </div>
+        <div class="positions-cols">
+          <div class="col-label">Поисковый запрос</div>
+          <div class="col-label" style="text-align:center">Было</div>
+          <div class="col-label" style="text-align:center">Стало</div>
+          <div class="col-label" style="text-align:center">Рост</div>
+        </div>
+        <div class="positions-row"><div class="kw-text">купить iphone 15 pro москва</div><div style="text-align:center"><span class="pos-badge pos-was">110</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">4</span></div><div class="pos-growth">▲ +106</div></div>
+        <div class="positions-row"><div class="kw-text">ноутбук для работы до 50000</div><div style="text-align:center"><span class="pos-badge pos-was">87</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">3</span></div><div class="pos-growth">▲ +84</div></div>
+        <div class="positions-row"><div class="kw-text">беспроводные наушники sony</div><div style="text-align:center"><span class="pos-badge pos-was">63</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">2</span></div><div class="pos-growth">▲ +61</div></div>
+        <div class="positions-row"><div class="kw-text">планшет для ребёнка 2024</div><div style="text-align:center"><span class="pos-badge pos-was">95</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">5</span></div><div class="pos-growth">▲ +90</div></div>
+        <div class="positions-row"><div class="kw-text">умная колонка яндекс цена</div><div style="text-align:center"><span class="pos-badge pos-was">72</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">3</span></div><div class="pos-growth">▲ +69</div></div>
+        <div class="positions-row"><div class="kw-text">купить телевизор самсунг 55</div><div style="text-align:center"><span class="pos-badge pos-was">130</span></div><div style="text-align:center"><span class="pos-badge pos-now-top">7</span></div><div class="pos-growth">▲ +123</div></div>
+        <div class="positions-footer">
+          <div class="legend-item"><div class="legend-dot"></div>ТОП-10</div>
+          <div class="legend-item">▲ Рост позиции</div>
+        </div>
+      </div>
+      <div class="case-side">
+        <div class="chart-card">
+          <div class="chart-label">Динамика средней позиции</div>
+          <div class="chart-bars">
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:8%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:20%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:39%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:58%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:76%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:87%;background:rgba(254,195,10,0.25)"></div></div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:100%;background:#fec30a"></div></div>
+          </div>
+          <div class="chart-axis"><span>Старт</span><span>Сейчас</span></div>
+        </div>
+        <div class="metrics-card">
+          <div class="metric-row"><div class="metric-name">Рост трафика</div><div class="metric-val green">+420%</div></div>
+          <div class="metric-row"><div class="metric-name">Запросов в ТОП-10</div><div class="metric-val">34</div></div>
+          <div class="metric-row"><div class="metric-name">Срок</div><div class="metric-val">6 мес</div></div>
+        </div>
+        <button class="case-cta">Попробовать 7 дней бесплатно</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ТАРИФЫ ===== -->
+<section class="tariffs" id="tariffs">
+  <div class="container">
+    <div class="text-center mb-14">
+      <div class="section-badge"><div class="line"></div>Подписка<div class="line"></div></div>
+      <h2>ТАРИФЫ</h2>
+      <p class="section-sub">7 дней продвижения бесплатно на любом тарифе · Без карты</p>
+    </div>
+    <div class="tariffs-grid">
+      <div class="tariff-card">
+        <div class="tariff-desc">Для небольших сайтов</div>
+        <div class="tariff-name">Старт</div>
+        <div class="tariff-price">
+          <div class="tariff-amount">2 900</div>
+          <div class="tariff-period">₽/мес</div>
+        </div>
+        <ul class="tariff-features">
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">1 сайт</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">До 50 запросов</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">Обновление позиций раз в 3 дня</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">Базовая аналитика</span></li>
+        </ul>
+        <button class="tariff-btn">7 дней бесплатно</button>
+      </div>
+
+      <div class="tariff-card highlight">
+        <div class="tariff-popular">Популярный</div>
+        <div class="tariff-desc">Для растущего бизнеса</div>
+        <div class="tariff-name">Бизнес</div>
+        <div class="tariff-price">
+          <div class="tariff-amount">7 900</div>
+          <div class="tariff-period">₽/мес</div>
+        </div>
+        <ul class="tariff-features">
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">До 5 сайтов</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">До 500 запросов</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">Ежедневное обновление позиций</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">Полная аналитика</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">Приоритетная поддержка</span></li>
+        </ul>
+        <button class="tariff-btn">7 дней бесплатно</button>
+      </div>
+
+      <div class="tariff-card">
+        <div class="tariff-desc">Для агентств и крупных сайтов</div>
+        <div class="tariff-name">Про</div>
+        <div class="tariff-price">
+          <div class="tariff-amount">19 900</div>
+          <div class="tariff-period">₽/мес</div>
+        </div>
+        <ul class="tariff-features">
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">Неограниченно сайтов</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">Неограниченно запросов</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">Мониторинг в реальном времени</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">API доступ</span></li>
+          <li class="tariff-feat"><div class="feat-check">✓</div><span class="tariff-feat-text">Персональный менеджер</span></li>
+        </ul>
+        <button class="tariff-btn">7 дней бесплатно</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-inner">
+      <div class="text-center mb-14">
+        <div class="section-badge"><div class="line"></div>Вопросы и ответы<div class="line"></div></div>
+        <h2>ЧАСТЫЕ ВОПРОСЫ</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Нужен ли мне доступ к сайту или коду?
+            <div class="faq-icon"><span class="faq-icon-sym"></span></div>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Нет. Вы просто указываете URL сайта. Всё остальное сервис делает через анализ и внешнюю оптимизацию. Доступ к панели управления сайтом не нужен.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Когда будут первые результаты?
+            <div class="faq-icon"><span class="faq-icon-sym"></span></div>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Первые движения в позициях заметны уже через 7 дней — именно столько длится бесплатный период. Устойчивый рост — от 30 дней. Сроки зависят от конкурентности ниши и возраста сайта.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Это безопасно для сайта? Не попаду под санкции Яндекса?
+            <div class="faq-icon"><span class="faq-icon-sym"></span></div>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Сервис использует только белые методы: работа с семантикой, поведенческими факторами и внешними сигналами в рамках требований Яндекса. Санкции исключены.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Можно подключить несколько сайтов?
+            <div class="faq-icon"><span class="faq-icon-sym"></span></div>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Да. На тарифе «Бизнес» — до 5 сайтов, на «Про» — без ограничений. Каждый сайт продвигается отдельно в своём личном кабинете.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Что будет после 7 бесплатных дней?
+            <div class="faq-icon"><span class="faq-icon-sym"></span></div>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">После пробного периода вы выбираете подходящий тариф и продолжаете продвижение. Никакого автоматического списания — только если вы сами подключите оплату.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Подходит ли для любой ниши?
+            <div class="faq-icon"><span class="faq-icon-sym"></span></div>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Сервис работает с большинством коммерческих ниш: услуги, e-commerce, клиники, юристы, строительство и другие. Перед стартом алгоритм оценивает конкурентность.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-badge">🎁 7 дней продвижения — бесплатно</div>
+      <h2>НАЧНИТЕ РАСТИ<br><span>ПРЯМО СЕЙЧАС</span></h2>
+      <p class="cta-desc">Введите email — мы пришлём инструкцию по подключению первого сайта</p>
+
+      <div class="cta-success" id="ctaSuccess">✅ Отлично! Проверьте почту</div>
+      <form class="cta-form" id="ctaForm" onsubmit="submitForm(event)">
+        <input class="cta-input" type="email" placeholder="ваш@email.ru" required />
+        <button class="cta-submit" type="submit">7 дней бесплатно</button>
+      </form>
+
+      <div class="cta-perks">
+        <div class="cta-perk">✓ 7 дней бесплатно</div>
+        <div class="cta-perk">✓ Без карты</div>
+        <div class="cta-perk">✓ Отмена в 1 клик</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="logo">
+        <div class="logo-img" style="width:28px;height:28px;border-radius:6px;">
+          <img src="https://cdn.poehali.dev/projects/bd7e7b90-35c3-49cd-913f-4b7db5da15f7/files/c452687c-8fc1-4883-9cf1-d825aa7e8bd8.jpg" alt="СЕО Ракета" />
+        </div>
+        <span class="logo-text" style="font-size:14px;">СЕО<span> РАКЕТА</span></span>
+      </div>
+      <div class="footer-copy">© 2024 СЕО Ракета. Все права защищены.</div>
+      <div class="footer-links">
+        <a href="#">Политика конфиденциальности</a>
+        <a href="#">Оферта</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Мобильное меню
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Бегущая строка
+  const marqueeItems = [
+    "Автоматическое продвижение","Рост позиций в Яндексе","Без SEO-специалистов",
+    "Личный кабинет 24/7","Первые результаты через 7 дней","7 дней бесплатно",
+    "Только белые методы","Прозрачная аналитика"
+  ];
+  const track = document.getElementById('marqueeTrack');
+  [0,1].forEach(() => {
+    marqueeItems.forEach(text => {
+      const span = document.createElement('span');
+      span.className = 'marquee-item';
+      span.innerHTML = `<span class="marquee-dot"></span>${text}`;
+      track.appendChild(span);
     });
+  });
+
+  // Переключение кейсов
+  function switchCase(idx, btn) {
+    document.querySelectorAll('.case-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.case-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('case-' + idx).classList.add('active');
+  }
+
+  // FAQ аккордеон
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Форма CTA
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('ctaForm').classList.add('hidden');
+    document.getElementById('ctaSuccess').classList.add('show');
+  }
 </script>
-<noscript>
-    <div><img src="https://mc.yandex.ru/watch/101026698" style="position:absolute; left:-9999px;" alt=""/></div>
-</noscript>
-<!-- /Yandex.Metrika counter -->
 </body>
 </html>
